@@ -652,6 +652,119 @@
         color: rgba(255,255,255,0.8);
     }
 }
+        /* ========== متغیرهای رنگی مختص پایه هفتم ========== */
+:root {
+    --primary-color: #2196F3;      /* آبی */
+    --primary-light: #64B5F6;
+    --primary-dark: #1976D2;
+    --secondary-color: #FF9800;     /* نارنجی */
+    --gradient-start: #2196F3;
+    --gradient-end: #00BCD4;
+    --card-bg: linear-gradient(135deg, #E3F2FD, #B3E5FC);
+    --badge-color: #FF9800;
+    --header-bg: linear-gradient(135deg, #2196F3, #00BCD4);
+    --exams-bg: linear-gradient(135deg, #E3F2FD, #B3E5FC);
+    --shadow-color: rgba(33, 150, 243, 0.2);
+}
+
+/* ========== استایل‌های عمومی ========== */
+.grade-header {
+    background: var(--header-bg);
+}
+
+.breadcrumb a:hover {
+    color: var(--secondary-color);
+}
+
+.section-title {
+    color: var(--primary-dark);
+}
+
+.section-title i {
+    color: var(--secondary-color);
+}
+
+/* ========== کارت‌های کتاب ========== */
+.book-card {
+    box-shadow: 0 5px 15px var(--shadow-color);
+    border: 1px solid rgba(33, 150, 243, 0.1);
+}
+
+.book-card:hover {
+    box-shadow: 0 15px 30px var(--shadow-color);
+}
+
+.book-cover {
+    background: var(--card-bg);
+}
+
+.book-cover i {
+    color: var(--primary-dark);
+}
+
+.book-category {
+    background: var(--primary-light);
+}
+
+.book-meta i {
+    color: var(--primary-color);
+}
+
+/* ========== دکمه‌ها ========== */
+.btn-primary {
+    background: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.btn-outline {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ========== بخش نمونه سوالات ========== */
+.exams-section {
+    background: var(--exams-bg);
+}
+
+.exam-card:hover {
+    box-shadow: 0 15px 30px var(--shadow-color);
+}
+
+.exam-icon {
+    background: var(--primary-light);
+}
+
+/* ========== بج‌ها ========== */
+.book-badge {
+    background: var(--badge-color);
+}
+
+/* ========== فیلتر ========== */
+.filter-btn {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ========== آمار ========== */
+.stat-item {
+    background: rgba(33, 150, 243, 0.1);
+    border: 1px solid rgba(33, 150, 243, 0.2);
+}
     </style>
 </head>
 <body>
