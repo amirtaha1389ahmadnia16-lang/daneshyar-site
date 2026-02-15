@@ -513,6 +513,145 @@
                 align-items: flex-start;
             }
         }
+        /* ========== استایل منوی کشویی ========== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .dropbtn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown .dropbtn i {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.dropdown:hover .dropbtn i {
+    transform: rotate(180deg);
+}
+
+.dropdown-mega {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: -100px;
+    width: 600px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    padding: 1.5rem;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-mega {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mega-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.mega-header h3 {
+    color: #333;
+    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+}
+
+.mega-header p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.mega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.mega-item {
+    padding: 1rem 0.5rem;
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.mega-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.mega-icon {
+    font-size: 2rem;
+}
+
+.mega-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.mega-desc {
+    font-size: 0.7rem;
+    opacity: 0.9;
+}
+
+/* ========== واکنش‌گرایی منوی کشویی ========== */
+@media (max-width: 768px) {
+    .dropdown-mega {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        padding: 1rem;
+        background: rgba(255,255,255,0.1);
+        margin-top: 0.5rem;
+    }
+    
+    .mega-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .mega-header {
+        color: white;
+        border-bottom-color: rgba(255,255,255,0.2);
+    }
+    
+    .mega-header h3 {
+        color: white;
+    }
+    
+    .mega-header p {
+        color: rgba(255,255,255,0.8);
+    }
+}
     </style>
 </head>
 <body>
@@ -935,4 +1074,5 @@
         };
     </script>
 </body>
+
 </html>
