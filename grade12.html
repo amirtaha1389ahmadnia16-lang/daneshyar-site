@@ -33,6 +33,210 @@
             color: #333;
         }
 
+        /* ========== استایل نویگیشن ========== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #ffd700;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-login:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-register {
+            background: #ffd700;
+            color: var(--primary-color);
+        }
+
+        .btn-register:hover {
+            background: #ffed4a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ========== استایل منوی کشویی ========== */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown .dropbtn i {
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        .dropdown:hover .dropbtn i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-mega {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: -100px;
+            width: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            padding: 1.5rem;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-mega {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mega-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .mega-header h3 {
+            color: #333;
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+        }
+
+        .mega-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .mega-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .mega-item {
+            padding: 1rem 0.5rem;
+            border-radius: 15px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .mega-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .mega-icon {
+            font-size: 2rem;
+        }
+
+        .mega-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .mega-desc {
+            font-size: 0.7rem;
+            opacity: 0.9;
+        }
+
         /* ========== هدر مخصوص پایه دوازدهم ========== */
         .grade-header {
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
@@ -697,6 +901,17 @@
 
         /* ========== واکنش‌گرایی ========== */
         @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin: 1rem 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
             .grade-title {
                 font-size: 2rem;
             }
@@ -726,179 +941,130 @@
             .major-cards {
                 grid-template-columns: 1fr;
             }
+            
+            .dropdown-mega {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                padding: 1rem;
+                background: rgba(255,255,255,0.1);
+                margin-top: 0.5rem;
+            }
+            
+            .mega-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .mega-header {
+                color: white;
+                border-bottom-color: rgba(255,255,255,0.2);
+            }
+            
+            .mega-header h3 {
+                color: white;
+            }
+            
+            .mega-header p {
+                color: rgba(255,255,255,0.8);
+            }
         }
-        /* ========== استایل منوی کشویی ========== */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown .dropbtn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.dropdown .dropbtn i {
-    font-size: 0.8rem;
-    transition: transform 0.3s;
-}
-
-.dropdown:hover .dropbtn i {
-    transform: rotate(180deg);
-}
-
-.dropdown-mega {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: -100px;
-    width: 600px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    padding: 1.5rem;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-}
-
-.dropdown:hover .dropdown-mega {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.mega-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.mega-header h3 {
-    color: #333;
-    margin-bottom: 0.3rem;
-    font-size: 1.2rem;
-}
-
-.mega-header p {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.mega-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-}
-
-.mega-item {
-    padding: 1rem 0.5rem;
-    border-radius: 15px;
-    color: white;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.3s;
-    text-align: center;
-}
-
-.mega-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.mega-icon {
-    font-size: 2rem;
-}
-
-.mega-title {
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.mega-desc {
-    font-size: 0.7rem;
-    opacity: 0.9;
-}
-
-/* ========== واکنش‌گرایی منوی کشویی ========== */
-@media (max-width: 768px) {
-    .dropdown-mega {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-        padding: 1rem;
-        background: rgba(255,255,255,0.1);
-        margin-top: 0.5rem;
-    }
-    
-    .mega-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .mega-header {
-        color: white;
-        border-bottom-color: rgba(255,255,255,0.2);
-    }
-    
-    .mega-header h3 {
-        color: white;
-    }
-    
-    .mega-header p {
-        color: rgba(255,255,255,0.8);
-    }
-}
     </style>
 </head>
 <body>
-    <!-- هدر مخصوص پایه دوازدهم -->
-    <header class="grade-header">
-        <div class="header-content">
-            <div class="breadcrumb">
-                <a href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a>
-                <i class="fas fa-chevron-left"></i>
-                <span>پایه دوازدهم</span>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>📚 دانشیار</h1>
             </div>
-
-            <div class="grade-title">
-                <i class="fas fa-graduation-cap"></i>
-                <span>پایه دوازدهم - سال کنکور</span>
+            <ul class="nav-menu">
+                <li><a href="index.html">خانه</a></li>
+                
+                <!-- منوی کشویی پایه‌ها -->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">پایه‌ها <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-mega">
+                        <div class="mega-content">
+                            <div class="mega-header">
+                                <h3>پایه‌های تحصیلی</h3>
+                                <p>همه پایه‌های هفتم تا دوازدهم</p>
+                            </div>
+                            <div class="mega-grid">
+                                <a href="grade7.html" class="mega-item" style="background: #2196F3">
+                                    <span class="mega-icon">📘</span>
+                                    <span class="mega-title">پایه هفتم</span>
+                                    <span class="mega-desc">متوسطه اول</span>
+                                </a>
+                                <a href="grade8.html" class="mega-item" style="background: #4CAF50">
+                                    <span class="mega-icon">📗</span>
+                                    <span class="mega-title">پایه هشتم</span>
+                                    <span class="mega-desc">متوسطه اول</span>
+                                </a>
+                                <a href="grade9.html" class="mega-item" style="background: #FF9800">
+                                    <span class="mega-icon">📙</span>
+                                    <span class="mega-title">پایه نهم</span>
+                                    <span class="mega-desc">متوسطه اول</span>
+                                </a>
+                                <a href="grade10.html" class="mega-item" style="background: #9C27B0">
+                                    <span class="mega-icon">📕</span>
+                                    <span class="mega-title">پایه دهم</span>
+                                    <span class="mega-desc">متوسطه دوم</span>
+                                </a>
+                                <a href="grade11.html" class="mega-item" style="background: #F44336">
+                                    <span class="mega-icon">📓</span>
+                                    <span class="mega-title">پایه یازدهم</span>
+                                    <span class="mega-desc">متوسطه دوم</span>
+                                </a>
+                                <a href="grade12.html" class="mega-item" style="background: #3F51B5">
+                                    <span class="mega-icon">📔</span>
+                                    <span class="mega-title">پایه دوازدهم</span>
+                                    <span class="mega-desc">متوسطه دوم</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- پایان منوی کشویی -->
+                
+                <li><a href="courses.html">دوره‌ها</a></li>
+                <li><a href="#">اساتید</a></li>
+                <li><a href="contact.html">تماس با ما</a></li>
+            </ul>
+            <div class="auth-buttons" id="auth-buttons">
+                <!-- اینجا پروفایل یا دکمه‌ها با جاوا اسکریپت پر میشن -->
             </div>
-
-            <p class="grade-desc">
-                کتاب‌های درسی پایه دوازدهم دوره دوم متوسطه - سال تحصیلی ۱۴۰۴-۱۴۰۵
-            </p>
-
-            <div class="grade-stats">
-                <div class="stat-item">
-                    <i class="fas fa-book"></i>
-                    <span>۱۳-۱۴ کتاب در هر رشته</span>
+        </nav>
+        
+        <!-- هدر مخصوص پایه دوازدهم -->
+        <div class="grade-header">
+            <div class="header-content">
+                <div class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a>
+                    <i class="fas fa-chevron-left"></i>
+                    <span>پایه دوازدهم</span>
                 </div>
-                <div class="stat-item">
-                    <i class="fas fa-file-pdf"></i>
-                    <span>همه کتاب‌ها PDF</span>
+
+                <div class="grade-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>پایه دوازدهم - سال کنکور</span>
                 </div>
-                <div class="stat-item">
-                    <i class="fas fa-trophy"></i>
-                    <span>ویژه کنکور ۱۴۰۵</span>
+
+                <p class="grade-desc">
+                    کتاب‌های درسی پایه دوازدهم دوره دوم متوسطه - سال تحصیلی ۱۴۰۴-۱۴۰۵
+                </p>
+
+                <div class="grade-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-book"></i>
+                        <span>۱۳-۱۴ کتاب در هر رشته</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>همه کتاب‌ها PDF</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>ویژه کنکور ۱۴۰۵</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -912,19 +1078,19 @@
         </div>
 
         <div class="major-cards">
-            <div class="major-card active" onclick="selectMajor('experimental')">
-                <div class="konkur-badge"><i class="fas fa-star"></i> کنکور تجربی</div>
-                <div class="major-icon">🔬</div>
-                <h3>علوم تجربی</h3>
-                <p>زیست، شیمی، فیزیک، ریاضی</p>
-                <span class="major-badge">۱۲ کتاب</span>
-            </div>
-            <div class="major-card" onclick="selectMajor('mathematics')">
+            <div class="major-card active" onclick="selectMajor('mathematics')">
                 <div class="konkur-badge"><i class="fas fa-star"></i> کنکور ریاضی</div>
                 <div class="major-icon">📐</div>
                 <h3>ریاضی و فیزیک</h3>
                 <p>حسابان، گسسته، هندسه، فیزیک</p>
                 <span class="major-badge">۱۳ کتاب</span>
+            </div>
+            <div class="major-card" onclick="selectMajor('experimental')">
+                <div class="konkur-badge"><i class="fas fa-star"></i> کنکور تجربی</div>
+                <div class="major-icon">🔬</div>
+                <h3>علوم تجربی</h3>
+                <p>زیست، شیمی، فیزیک، ریاضی</p>
+                <span class="major-badge">۱۲ کتاب</span>
             </div>
             <div class="major-card" onclick="selectMajor('humanities')">
                 <div class="konkur-badge"><i class="fas fa-star"></i> کنکور انسانی</div>
@@ -954,24 +1120,6 @@
         </div>
     </section>
 
-    <!-- بخش کتاب‌های رشته انسانی -->
-    <section class="books-section" id="humanities-books">
-        <div class="section-header">
-            <h2>
-                <i class="fas fa-books"></i>
-                کتاب‌های درسی رشته انسانی
-            </h2>
-            <div class="major-title">
-                <i class="fas fa-scroll"></i>
-                علوم انسانی
-            </div>
-        </div>
-
-        <div class="books-grid">
-            <!-- کتاب‌ها با جاوا اسکریپت پر می‌شوند -->
-        </div>
-    </section>
-
     <!-- بخش کتاب‌های رشته تجربی -->
     <section class="books-section" id="experimental-books">
         <div class="section-header">
@@ -982,6 +1130,24 @@
             <div class="major-title">
                 <i class="fas fa-flask"></i>
                 علوم تجربی
+            </div>
+        </div>
+
+        <div class="books-grid">
+            <!-- کتاب‌ها با جاوا اسکریپت پر می‌شوند -->
+        </div>
+    </section>
+
+    <!-- بخش کتاب‌های رشته انسانی -->
+    <section class="books-section" id="humanities-books">
+        <div class="section-header">
+            <h2>
+                <i class="fas fa-books"></i>
+                کتاب‌های درسی رشته انسانی
+            </h2>
+            <div class="major-title">
+                <i class="fas fa-scroll"></i>
+                علوم انسانی
             </div>
         </div>
 
@@ -1051,9 +1217,9 @@
                 <h4>دسترسی سریع</h4>
                 <ul>
                     <li><a href="index.html">خانه</a></li>
-                    <li><a href="#">دوره‌ها</a></li>
+                    <li><a href="courses.html">دوره‌ها</a></li>
                     <li><a href="#">اساتید</a></li>
-                    <li><a href="#">تماس با ما</a></li>
+                    <li><a href="contact.html">تماس با ما</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1088,6 +1254,21 @@
             { title: 'سلامت و بهداشت', desc: 'کتاب سلامت و بهداشت دوازدهم', icon: '❤️', fileSize: '۱۲.۳ مگابایت', pages: '۱۶۰ صفحه' }
         ];
 
+        // ========== داده‌های کتاب‌های رشته تجربی ==========
+        const experimentalBooks = [
+            { title: 'فارسی 3', desc: 'کتاب فارسی پایه دوازدهم', icon: '📖', fileSize: '۱۱.۵ مگابایت', pages: '۲۰۸ صفحه' },
+            { title: 'نگارش فارسی 3', desc: 'کتاب نگارش فارسی پایه دوازدهم', icon: '✍️', fileSize: '۸.۳ مگابایت', pages: '۱۵۲ صفحه' },
+            { title: 'دین و زندگی 3', desc: 'کتاب دین و زندگی پایه دوازدهم', icon: '☀️', fileSize: '۹.۲ مگابایت', pages: '۱۶۰ صفحه' },
+            { title: 'انگلیسی 3', desc: 'کتاب زبان انگلیسی پایه دوازدهم', icon: '🇬🇧', fileSize: '۱۸.۱ مگابایت', pages: '۲۲۴ صفحه' },
+            { title: 'عربی 3', desc: 'کتاب عربی پایه دوازدهم رشته تجربی', icon: '🕌', fileSize: '۱۱.۴ مگابایت', pages: '۱۶۸ صفحه' },
+            { title: 'ریاضی 3', desc: 'کتاب ریاضی پایه دوازدهم تجربی', icon: '🧮', fileSize: '۱۷.۸ مگابایت', pages: '۲۲۴ صفحه' },
+            { title: 'فیزیک 3', desc: 'کتاب فیزیک پایه دوازدهم', icon: '⚡', fileSize: '۲۰.۴ مگابایت', pages: '۲۵۶ صفحه' },
+            { title: 'شیمی 3', desc: 'کتاب شیمی پایه دوازدهم', icon: '🧪', fileSize: '۱۹.۷ مگابایت', pages: '۲۳۲ صفحه' },
+            { title: 'زیست‌شناسی 3', desc: 'کتاب زیست‌شناسی پایه دوازدهم', icon: '🧬', fileSize: '۲۳.۶ مگابایت', pages: '۲۷۲ صفحه' },
+            { title: 'هویت اجتماعی', desc: 'کتاب هویت اجتماعی دوازدهم', icon: '👥', fileSize: '۱۰.۶ مگابایت', pages: '۱۴۴ صفحه' },
+            { title: 'سلامت و بهداشت', desc: 'کتاب سلامت و بهداشت دوازدهم', icon: '❤️', fileSize: '۱۲.۳ مگابایت', pages: '۱۶۰ صفحه' }
+        ];
+
         // ========== داده‌های کتاب‌های رشته انسانی ==========
         const humanitiesBooks = [
             { title: 'فارسی 3', desc: 'کتاب فارسی پایه دوازدهم', icon: '📖', fileSize: '۱۱.۵ مگابایت', pages: '۲۰۸ صفحه' },
@@ -1102,21 +1283,6 @@
             { title: 'جامعه‌شناسی 3', desc: 'کتاب جامعه‌شناسی پایه دوازدهم', icon: '👥', fileSize: '۱۳.۷ مگابایت', pages: '۱۶۸ صفحه' },
             { title: 'فلسفه 2', desc: 'کتاب فلسفه پایه دوازدهم', icon: '🧠', fileSize: '۱۱.۸ مگابایت', pages: '۱۵۲ صفحه' },
             { title: 'تحلیل فرهنگ', desc: 'کتاب تحلیل فرهنگ دوازدهم', icon: '📚', fileSize: '۱۰.۴ مگابایت', pages: '۱۳۶ صفحه' },
-            { title: 'سلامت و بهداشت', desc: 'کتاب سلامت و بهداشت دوازدهم', icon: '❤️', fileSize: '۱۲.۳ مگابایت', pages: '۱۶۰ صفحه' }
-        ];
-
-        // ========== داده‌های کتاب‌های رشته تجربی ==========
-        const experimentalBooks = [
-            { title: 'فارسی 3', desc: 'کتاب فارسی پایه دوازدهم', icon: '📖', fileSize: '۱۱.۵ مگابایت', pages: '۲۰۸ صفحه' },
-            { title: 'نگارش فارسی 3', desc: 'کتاب نگارش فارسی پایه دوازدهم', icon: '✍️', fileSize: '۸.۳ مگابایت', pages: '۱۵۲ صفحه' },
-            { title: 'دین و زندگی 3', desc: 'کتاب دین و زندگی پایه دوازدهم', icon: '☀️', fileSize: '۹.۲ مگابایت', pages: '۱۶۰ صفحه' },
-            { title: 'انگلیسی 3', desc: 'کتاب زبان انگلیسی پایه دوازدهم', icon: '🇬🇧', fileSize: '۱۸.۱ مگابایت', pages: '۲۲۴ صفحه' },
-            { title: 'عربی 3', desc: 'کتاب عربی پایه دوازدهم رشته تجربی', icon: '🕌', fileSize: '۱۱.۴ مگابایت', pages: '۱۶۸ صفحه' },
-            { title: 'ریاضی 3', desc: 'کتاب ریاضی پایه دوازدهم تجربی', icon: '🧮', fileSize: '۱۷.۸ مگابایت', pages: '۲۲۴ صفحه' },
-            { title: 'فیزیک 3', desc: 'کتاب فیزیک پایه دوازدهم', icon: '⚡', fileSize: '۲۰.۴ مگابایت', pages: '۲۵۶ صفحه' },
-            { title: 'شیمی 3', desc: 'کتاب شیمی پایه دوازدهم', icon: '🧪', fileSize: '۱۹.۷ مگابایت', pages: '۲۳۲ صفحه' },
-            { title: 'زیست‌شناسی 3', desc: 'کتاب زیست‌شناسی پایه دوازدهم', icon: '🧬', fileSize: '۲۳.۶ مگابایت', pages: '۲۷۲ صفحه' },
-            { title: 'هویت اجتماعی', desc: 'کتاب هویت اجتماعی دوازدهم', icon: '👥', fileSize: '۱۰.۶ مگابایت', pages: '۱۴۴ صفحه' },
             { title: 'سلامت و بهداشت', desc: 'کتاب سلامت و بهداشت دوازدهم', icon: '❤️', fileSize: '۱۲.۳ مگابایت', pages: '۱۶۰ صفحه' }
         ];
 
@@ -1216,17 +1382,17 @@
                     displayBooks(mathematicsBooks, 'mathematics-books');
                     document.getElementById('mathematics-books').setAttribute('data-loaded', 'true');
                 }
-            } else if (major === 'humanities') {
-                document.getElementById('humanities-books').classList.add('active');
-                if (!document.getElementById('humanities-books').hasAttribute('data-loaded')) {
-                    displayBooks(humanitiesBooks, 'humanities-books');
-                    document.getElementById('humanities-books').setAttribute('data-loaded', 'true');
-                }
             } else if (major === 'experimental') {
                 document.getElementById('experimental-books').classList.add('active');
                 if (!document.getElementById('experimental-books').hasAttribute('data-loaded')) {
                     displayBooks(experimentalBooks, 'experimental-books');
                     document.getElementById('experimental-books').setAttribute('data-loaded', 'true');
+                }
+            } else if (major === 'humanities') {
+                document.getElementById('humanities-books').classList.add('active');
+                if (!document.getElementById('humanities-books').hasAttribute('data-loaded')) {
+                    displayBooks(humanitiesBooks, 'humanities-books');
+                    document.getElementById('humanities-books').setAttribute('data-loaded', 'true');
                 }
             }
 
