@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دانشیار - سامانه آموزشی هوشمند</title>
+    <!-- فونت وزیر از CDN -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <!-- فونت آیکون Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- فایل CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- هدر سایت -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>📚 دانشیار</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="active">خانه</a></li>
+                <li><a href="#">دوره‌ها</a></li>
+                <li><a href="#">اساتید</a></li>
+                <li><a href="#">تماس با ما</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-login">ورود</button>
+                <button class="btn btn-register">ثبت‌نام</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- بخش اصلی - hero section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>یادگیری هوشمند با <span class="highlight">دانشیار</span></h2>
+            <p>آموزش تعاملی برای پایه‌های هفتم تا دوازدهم با جدیدترین متدهای روز دنیا</p>
+            <div class="search-box">
+                <input type="text" placeholder="جستجوی درس، مبحث یا استاد...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش پایه‌های تحصیلی -->
+    <section class="grades">
+        <h2 class="section-title">پایه‌های تحصیلی</h2>
+        <p class="section-subtitle">همه درس‌ها برای همه پایه‌ها</p>
+        
+        <div class="grade-cards">
+            <!-- کارت هفتم -->
+            <div class="card" onclick="showMessage('پایه هفتم')">
+                <div class="card-icon">📘</div>
+                <h3>پایه هفتم</h3>
+                <p>ریاضی، علوم، فارسی، عربی، انگلیسی و...</p>
+                <span class="badge">۱۲ درس</span>
+            </div>
+            
+            <!-- کارت هشتم -->
+            <div class="card" onclick="showMessage('پایه هشتم')">
+                <div class="card-icon">📗</div>
+                <h3>پایه هشتم</h3>
+                <p>ریاضی، علوم، فارسی، عربی، انگلیسی و...</p>
+                <span class="badge">۱۲ درس</span>
+            </div>
+            
+            <!-- کارت نهم -->
+            <div class="card" onclick="showMessage('پایه نهم')">
+                <div class="card-icon">📙</div>
+                <h3>پایه نهم</h3>
+                <p>ریاضی، علوم، فارسی، عربی، انگلیسی و...</p>
+                <span class="badge">۱۲ درس</span>
+            </div>
+            
+            <!-- کارت دهم -->
+            <div class="card" onclick="showMessage('پایه دهم')">
+                <div class="card-icon">📕</div>
+                <h3>پایه دهم</h3>
+                <p>ریاضی، فیزیک، شیمی، زیست، ادبیات و...</p>
+                <span class="badge">۱۵ درس</span>
+            </div>
+            
+            <!-- کارت یازدهم -->
+            <div class="card" onclick="showMessage('پایه یازدهم')">
+                <div class="card-icon">📓</div>
+                <h3>پایه یازدهم</h3>
+                <p>ریاضی، فیزیک، شیمی، زیست، ادبیات و...</p>
+                <span class="badge">۱۵ درس</span>
+            </div>
+            
+            <!-- کارت دوازدهم -->
+            <div class="card" onclick="showMessage('پایه دوازدهم')">
+                <div class="card-icon">📔</div>
+                <h3>پایه دوازدهم</h3>
+                <p>ریاضی، فیزیک، شیمی، زیست، ادبیات و...</p>
+                <span class="badge">۱۵ درس</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش ویژگی‌ها -->
+    <section class="features">
+        <h2 class="section-title">چرا دانشیار؟</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-video"></i>
+                <h4>ویدیوهای تعاملی</h4>
+                <p>بیش از ۵۰۰ ساعت ویدیوی آموزشی با کیفیت</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-pencil-alt"></i>
+                <h4>آزمون‌های آنلاین</h4>
+                <p>سنجش پیشرفت تحصیلی با آزمون‌های هوشمند</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>دسترسی همیشگی</h4>
+                <p>روی همه دستگاه‌ها، هر زمان، هر مکان</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-chart-line"></i>
+                <h4>گزارش پیشرفت</h4>
+                <p>نمودار پیشرفت تحصیلی و تحلیل عملکرد</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>دانشیار</h3>
+                <p>سامانه آموزشی هوشمند برای دانش‌آموزان پایه هفتم تا دوازدهم</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>دسترسی سریع</h4>
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">دوره‌ها</a></li>
+                    <li><a href="#">اساتید</a></li>
+                    <li><a href="#">وبلاگ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>تماس با ما</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</li>
+                    <li><i class="fas fa-envelope"></i> info@daneshyar.ir</li>
+                    <li><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>تمامی حقوق برای دانشیار محفوظ است © ۱۴۰۴</p>
+        </div>
+    </footer>
+
+    <!-- فایل جاوا اسکریپت -->
+    <script src="script.js"></script>
+</body>
+</html>
