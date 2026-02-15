@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پایه دوازدهم | دانشیار</title>
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    
+    <!-- CSS مخصوص پایه دوازدهم (رنگ سرمه‌ای) -->
+    <style>
+        /* ========== متغیرهای رنگی مختص پایه دوازدهم ========== */
+        :root {
+            --primary-color: #3F51B5;      /* سرمه‌ای (نیلی) */
+            --primary-light: #7986CB;
+            --primary-dark: #303F9F;
+            --secondary-color: #FFC107;     /* زرد برای تضاد */
+            --gradient-start: #3F51B5;
+            --gradient-end: #1A237E;
+            --card-bg: linear-gradient(135deg, #E8EAF6, #C5CAE9);
+            --badge-color: #FFC107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* ========== هدر مخصوص پایه دوازدهم ========== */
+        .grade-header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 2rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grade-header::before {
+            content: '📔';
+            position: absolute;
+            left: -20px;
+            top: -20px;
+            font-size: 15rem;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .grade-header::after {
+            content: '۱۲';
+            position: absolute;
+            right: 5%;
+            bottom: -30px;
+            font-size: 12rem;
+            opacity: 0.1;
+            font-weight: bold;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb i {
+            font-size: 0.9rem;
+        }
+
+        .grade-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .grade-title i {
+            font-size: 3.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 20px;
+        }
+
+        .grade-desc {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .grade-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-item i {
+            font-size: 1.5rem;
+        }
+
+        /* ========== بخش انتخاب رشته ========== */
+        .major-selector {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .selector-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .selector-title h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .selector-title p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .major-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .major-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .major-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(63, 81, 181, 0.2);
+        }
+
+        .major-card.active {
+            border-color: var(--primary-color);
+            background: var(--card-bg);
+        }
+
+        .major-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .major-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .major-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .major-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .major-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(135deg, rgba(63, 81, 181, 0.1), rgba(26, 35, 126, 0.1));
+            transform: rotate(45deg);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .major-card:hover::before {
+            opacity: 1;
+        }
+
+        .konkur-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: #F44336;
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        /* ========== بخش کتاب‌ها ========== */
+        .books-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+            display: none;
+        }
+
+        .books-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header h2 i {
+            color: var(--secondary-color);
+        }
+
+        .major-title {
+            background: var(--primary-light);
+            color: white;
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ========== گرید کتاب‌ها ========== */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(63, 81, 181, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            border: 1px solid rgba(63, 81, 181, 0.1);
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(63, 81, 181, 0.2);
+        }
+
+        .book-cover {
+            width: 120px;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::before {
+            content: '📚';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+
+        .book-cover i {
+            position: relative;
+            z-index: 2;
+            font-size: 3rem;
+            color: var(--primary-dark);
+        }
+
+        .book-info {
+            flex: 1;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .book-category {
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .book-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .book-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .book-meta i {
+            color: var(--primary-color);
+            width: 16px;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(63, 81, 181, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--badge-color);
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .konkur-tag {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: #F44336;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ========== بخش نمونه سوالات ========== */
+        .exams-section {
+            background: linear-gradient(135deg, #E8EAF6, #C5CAE9);
+            padding: 3rem 5%;
+            margin-top: 2rem;
+        }
+
+        .exams-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .exams-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .exams-header h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .exams-header p {
+            color: #666;
+        }
+
+        .exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .exam-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(63, 81, 181, 0.2);
+        }
+
+        .exam-card::before {
+            content: '📝';
+            position: absolute;
+            left: -20px;
+            bottom: -20px;
+            font-size: 5rem;
+            opacity: 0.05;
+            transform: rotate(-15deg);
+        }
+
+        .exam-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .exam-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .exam-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .exam-tag {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: #f0f0f0;
+            border-radius: 50px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========== بخش ویژه کنکور ========== */
+        .konkur-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem 5%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(63, 81, 181, 0.1);
+        }
+
+        .konkur-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .konkur-header h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .konkur-header p {
+            color: #666;
+        }
+
+        .konkur-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .konkur-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #E8EAF6, #C5CAE9);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .konkur-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(63, 81, 181, 0.2);
+        }
+
+        .konkur-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .konkur-item h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .konkur-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ========== فوتر ========== */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding-top: 3rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #34495e;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #ffd700;
+            color: #2c3e50;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid #34495e;
+        }
+
+        /* ========== واکنش‌گرایی ========== */
+        @media (max-width: 768px) {
+            .grade-title {
+                font-size: 2rem;
+            }
+
+            .grade-title i {
+                font-size: 2rem;
+            }
+
+            .book-card {
+                flex-direction: column;
+            }
+
+            .book-cover {
+                width: 100%;
+                height: 100px;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .major-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر مخصوص پایه دوازدهم -->
+    <header class="grade-header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a>
+                <i class="fas fa-chevron-left"></i>
+                <span>پایه دوازدهم</span>
+            </div>
+
+            <div class="grade-title">
+                <i class="fas fa-graduation-cap"></i>
+                <span>پایه دوازدهم - سال کنکور</span>
+            </div>
+
+            <p class="grade-desc">
+                کتاب‌های درسی پایه دوازدهم دوره دوم متوسطه - سال تحصیلی ۱۴۰۴-۱۴۰۵
+            </p>
+
+            <div class="grade-stats">
+                <div class="stat-item">
+                    <i class="fas fa-book"></i>
+                    <span>۱۳-۱۴ کتاب در هر رشته</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>همه کتاب‌ها PDF</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>ویژه کنکور ۱۴۰۵</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- بخش انتخاب رشته -->
+    <section class="major-selector">
+        <div class="selector-title">
+            <h2>🎓 رشته تحصیلی خود را انتخاب کنید</h2>
+            <p>کتاب‌های درسی پایه دوازدهم بر اساس رشته‌های مختلف</p>
+        </div>
+
+        <div class="major-cards">
+            <div class="major-card active" onclick="selectMajor('experimental')">
+                <div class="konkur-badge"><i class="fas fa-star"></i> کنکور تجربی</div>
+                <div class="major-icon">🔬</div>
+                <h3>علوم تجربی</h3>
+                <p>زیست، شیمی، فیزیک، ریاضی</p>
+                <span class="major-badge">۱۲ کتاب</span>
+            </div>
+            <div class="major-card" onclick="selectMajor('mathematics')">
+                <div class="konkur-badge"><i class="fas fa-star"></i> کنکور ریاضی</div>
+                <div class="major-icon">📐</div>
+                <h3>ریاضی و فیزیک</h3>
+                <p>حسابان، گسسته، هندسه، فیزیک</p>
+                <span class="major-badge">۱۳ کتاب</span>
+            </div>
+            <div class="major-card" onclick="selectMajor('humanities')">
+                <div class="konkur-badge"><i class="fas fa-star"></i> کنکور انسانی</div>
+                <div class="major-icon">📜</div>
+                <h3>علوم انسانی</h3>
+                <p>فلسفه، جامعه‌شناسی، تاریخ، ادبیات</p>
+                <span class="major-badge">۱۳ کتاب</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش کتاب‌های رشته ریاضی -->
+    <section class="books-section active" id="mathematics-books">
+        <div class="section-header">
+            <h2>
+                <i class="fas fa-books"></i>
+                کتاب‌های درسی رشته ریاضی
+            </h2>
+            <div class="major-title">
+                <i class="fas fa-calculator"></i>
+                ریاضی و فیزیک
+            </div>
+        </div>
+
+        <div class="books-grid">
+            <!-- کتاب‌ها با جاوا اسکریپت پر می‌شوند -->
+        </div>
+    </section>
+
+    <!-- بخش کتاب‌های رشته انسانی -->
+    <section class="books-section" id="humanities-books">
+        <div class="section-header">
+            <h2>
+                <i class="fas fa-books"></i>
+                کتاب‌های درسی رشته انسانی
+            </h2>
+            <div class="major-title">
+                <i class="fas fa-scroll"></i>
+                علوم انسانی
+            </div>
+        </div>
+
+        <div class="books-grid">
+            <!-- کتاب‌ها با جاوا اسکریپت پر می‌شوند -->
+        </div>
+    </section>
+
+    <!-- بخش کتاب‌های رشته تجربی -->
+    <section class="books-section" id="experimental-books">
+        <div class="section-header">
+            <h2>
+                <i class="fas fa-books"></i>
+                کتاب‌های درسی رشته تجربی
+            </h2>
+            <div class="major-title">
+                <i class="fas fa-flask"></i>
+                علوم تجربی
+            </div>
+        </div>
+
+        <div class="books-grid">
+            <!-- کتاب‌ها با جاوا اسکریپت پر می‌شوند -->
+        </div>
+    </section>
+
+    <!-- بخش ویژه کنکور -->
+    <section class="konkur-section">
+        <div class="konkur-header">
+            <h2><i class="fas fa-trophy"></i> ویژه داوطلبان کنکور ۱۴۰۵</h2>
+            <p>منابع کمک‌آموزشی و نمونه سوالات کنکور</p>
+        </div>
+        <div class="konkur-grid">
+            <div class="konkur-item">
+                <i class="fas fa-history"></i>
+                <h4>کنکورهای ۱۰ سال اخیر</h4>
+                <p>دفترچه سوالات و پاسخ تشریحی</p>
+            </div>
+            <div class="konkur-item">
+                <i class="fas fa-chart-line"></i>
+                <h4>آمار قبولی کنکور</h4>
+                <p>تحلیل و بررسی روند کنکور</p>
+            </div>
+            <div class="konkur-item">
+                <i class="fas fa-calendar-alt"></i>
+                <h4>برنامه‌ریزی کنکور</h4>
+                <p>برنامه مطالعه ۶ ماهه</p>
+            </div>
+            <div class="konkur-item">
+                <i class="fas fa-lightbulb"></i>
+                <h4>مشاوره رایگان</h4>
+                <p>اتصال به مشاوران تحصیلی</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش نمونه سوالات -->
+    <section class="exams-section">
+        <div class="exams-container">
+            <div class="exams-header">
+                <h2>📝 نمونه سوالات امتحانی نهایی</h2>
+                <p>سوالات امتحان نهایی به همراه پاسخ تشریحی</p>
+            </div>
+
+            <div class="exams-grid" id="exams-grid">
+                <!-- نمونه سوالات با جاوا اسکریپت پر می‌شوند -->
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>📚 دانشیار</h3>
+                <p>سامانه آموزشی هوشمند برای دانش‌آموزان پایه هفتم تا دوازدهم</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>دسترسی سریع</h4>
+                <ul>
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="#">دوره‌ها</a></li>
+                    <li><a href="#">اساتید</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>تماس با ما</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</li>
+                    <li><i class="fas fa-envelope"></i> info@daneshyar.ir</li>
+                    <li><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>تمامی حقوق برای دانشیار محفوظ است © ۱۴۰۴</p>
+        </div>
+    </footer>
+
+    <!-- جاوا اسکریپت مخصوص پایه دوازدهم -->
+    <script>
+        // ========== داده‌های کتاب‌های رشته ریاضی ==========
+        const mathematicsBooks = [
+            { title: 'فارسی 3', desc: 'کتاب فارسی پایه دوازدهم', icon: '📖', fileSize: '۱۱.۵ مگابایت', pages: '۲۰۸ صفحه' },
+            { title: 'نگارش فارسی 3', desc: 'کتاب نگارش فارسی پایه دوازدهم', icon: '✍️', fileSize: '۸.۳ مگابایت', pages: '۱۵۲ صفحه' },
+            { title: 'دین و زندگی 3', desc: 'کتاب دین و زندگی پایه دوازدهم', icon: '☀️', fileSize: '۹.۲ مگابایت', pages: '۱۶۰ صفحه' },
+            { title: 'انگلیسی 3', desc: 'کتاب زبان انگلیسی پایه دوازدهم', icon: '🇬🇧', fileSize: '۱۸.۱ مگابایت', pages: '۲۲۴ صفحه' },
+            { title: 'عربی 3', desc: 'کتاب عربی پایه دوازدهم رشته ریاضی', icon: '🕌', fileSize: '۱۱.۴ مگابایت', pages: '۱۶۸ صفحه' },
+            { title: 'حسابان 2', desc: 'کتاب حسابان پایه دوازدهم', icon: '📈', fileSize: '۱۸.۹ مگابایت', pages: '۲۴۰ صفحه' },
+            { title: 'هندسه 3', desc: 'کتاب هندسه پایه دوازدهم', icon: '📐', fileSize: '۱۶.۲ مگابایت', pages: '۲۰۰ صفحه' },
+            { title: 'ریاضیات گسسته', desc: 'کتاب ریاضیات گسسته دوازدهم', icon: '⚛️', fileSize: '۱۵.۸ مگابایت', pages: '۱۸۴ صفحه' },
+            { title: 'فیزیک 3', desc: 'کتاب فیزیک پایه دوازدهم', icon: '⚡', fileSize: '۲۰.۴ مگابایت', pages: '۲۵۶ صفحه' },
+            { title: 'شیمی 3', desc: 'کتاب شیمی پایه دوازدهم', icon: '🧪', fileSize: '۱۹.۷ مگابایت', pages: '۲۳۲ صفحه' },
+            { title: 'هویت اجتماعی', desc: 'کتاب هویت اجتماعی دوازدهم', icon: '👥', fileSize: '۱۰.۶ مگابایت', pages: '۱۴۴ صفحه' },
+            { title: 'سلامت و بهداشت', desc: 'کتاب سلامت و بهداشت دوازدهم', icon: '❤️', fileSize: '۱۲.۳ مگابایت', pages: '۱۶۰ صفحه' }
+        ];
+
+        // ========== داده‌های کتاب‌های رشته انسانی ==========
+        const humanitiesBooks = [
+            { title: 'فارسی 3', desc: 'کتاب فارسی پایه دوازدهم', icon: '📖', fileSize: '۱۱.۵ مگابایت', pages: '۲۰۸ صفحه' },
+            { title: 'نگارش فارسی 3', desc: 'کتاب نگارش فارسی پایه دوازدهم', icon: '✍️', fileSize: '۸.۳ مگابایت', pages: '۱۵۲ صفحه' },
+            { title: 'دین و زندگی 3', desc: 'کتاب دین و زندگی پایه دوازدهم', icon: '☀️', fileSize: '۹.۲ مگابایت', pages: '۱۶۰ صفحه' },
+            { title: 'انگلیسی 3', desc: 'کتاب زبان انگلیسی پایه دوازدهم', icon: '🇬🇧', fileSize: '۱۸.۱ مگابایت', pages: '۲۲۴ صفحه' },
+            { title: 'عربی 3', desc: 'کتاب عربی پایه دوازدهم رشته انسانی', icon: '🕌', fileSize: '۱۲.۶ مگابایت', pages: '۱۸۴ صفحه' },
+            { title: 'ریاضی و آمار 3', desc: 'کتاب ریاضی و آمار پایه دوازدهم', icon: '📊', fileSize: '۱۵.۳ مگابایت', pages: '۱۹۲ صفحه' },
+            { title: 'علوم و فنون ادبی 3', desc: 'کتاب علوم و فنون ادبی پایه دوازدهم', icon: '📜', fileSize: '۱۴.۸ مگابایت', pages: '۱۸۴ صفحه' },
+            { title: 'تاریخ 3', desc: 'کتاب تاریخ پایه دوازدهم', icon: '🏛️', fileSize: '۱۶.۵ مگابایت', pages: '۲۰۸ صفحه' },
+            { title: 'جغرافیا 3', desc: 'کتاب جغرافیا پایه دوازدهم', icon: '🌍', fileSize: '۱۵.۹ مگابایت', pages: '۱۹۲ صفحه' },
+            { title: 'جامعه‌شناسی 3', desc: 'کتاب جامعه‌شناسی پایه دوازدهم', icon: '👥', fileSize: '۱۳.۷ مگابایت', pages: '۱۶۸ صفحه' },
+            { title: 'فلسفه 2', desc: 'کتاب فلسفه پایه دوازدهم', icon: '🧠', fileSize: '۱۱.۸ مگابایت', pages: '۱۵۲ صفحه' },
+            { title: 'تحلیل فرهنگ', desc: 'کتاب تحلیل فرهنگ دوازدهم', icon: '📚', fileSize: '۱۰.۴ مگابایت', pages: '۱۳۶ صفحه' },
+            { title: 'سلامت و بهداشت', desc: 'کتاب سلامت و بهداشت دوازدهم', icon: '❤️', fileSize: '۱۲.۳ مگابایت', pages: '۱۶۰ صفحه' }
+        ];
+
+        // ========== داده‌های کتاب‌های رشته تجربی ==========
+        const experimentalBooks = [
+            { title: 'فارسی 3', desc: 'کتاب فارسی پایه دوازدهم', icon: '📖', fileSize: '۱۱.۵ مگابایت', pages: '۲۰۸ صفحه' },
+            { title: 'نگارش فارسی 3', desc: 'کتاب نگارش فارسی پایه دوازدهم', icon: '✍️', fileSize: '۸.۳ مگابایت', pages: '۱۵۲ صفحه' },
+            { title: 'دین و زندگی 3', desc: 'کتاب دین و زندگی پایه دوازدهم', icon: '☀️', fileSize: '۹.۲ مگابایت', pages: '۱۶۰ صفحه' },
+            { title: 'انگلیسی 3', desc: 'کتاب زبان انگلیسی پایه دوازدهم', icon: '🇬🇧', fileSize: '۱۸.۱ مگابایت', pages: '۲۲۴ صفحه' },
+            { title: 'عربی 3', desc: 'کتاب عربی پایه دوازدهم رشته تجربی', icon: '🕌', fileSize: '۱۱.۴ مگابایت', pages: '۱۶۸ صفحه' },
+            { title: 'ریاضی 3', desc: 'کتاب ریاضی پایه دوازدهم تجربی', icon: '🧮', fileSize: '۱۷.۸ مگابایت', pages: '۲۲۴ صفحه' },
+            { title: 'فیزیک 3', desc: 'کتاب فیزیک پایه دوازدهم', icon: '⚡', fileSize: '۲۰.۴ مگابایت', pages: '۲۵۶ صفحه' },
+            { title: 'شیمی 3', desc: 'کتاب شیمی پایه دوازدهم', icon: '🧪', fileSize: '۱۹.۷ مگابایت', pages: '۲۳۲ صفحه' },
+            { title: 'زیست‌شناسی 3', desc: 'کتاب زیست‌شناسی پایه دوازدهم', icon: '🧬', fileSize: '۲۳.۶ مگابایت', pages: '۲۷۲ صفحه' },
+            { title: 'هویت اجتماعی', desc: 'کتاب هویت اجتماعی دوازدهم', icon: '👥', fileSize: '۱۰.۶ مگابایت', pages: '۱۴۴ صفحه' },
+            { title: 'سلامت و بهداشت', desc: 'کتاب سلامت و بهداشت دوازدهم', icon: '❤️', fileSize: '۱۲.۳ مگابایت', pages: '۱۶۰ صفحه' }
+        ];
+
+        // ========== داده‌های نمونه سوالات ==========
+        const examsData = [
+            { title: 'زیست‌شناسی 3 - نهایی', questions: '۳۵ سوال', year: 'خرداد ۱۴۰۴' },
+            { title: 'شیمی 3 - نهایی', questions: '۳۲ سوال', year: 'خرداد ۱۴۰۴' },
+            { title: 'فیزیک 3 - نهایی', questions: '۳۰ سوال', year: 'خرداد ۱۴۰۴' },
+            { title: 'ریاضی 3 - نهایی', questions: '۳۳ سوال', year: 'خرداد ۱۴۰۴' },
+            { title: 'فارسی 3 - نهایی', questions: '۲۸ سوال', year: 'خرداد ۱۴۰۴' },
+            { title: 'دین و زندگی 3 - نهایی', questions: '۲۵ سوال', year: 'خرداد ۱۴۰۴' },
+            { title: 'عربی 3 - نهایی', questions: '۲۶ سوال', year: 'خرداد ۱۴۰۴' },
+            { title: 'انگلیسی 3 - نهایی', questions: '۲۷ سوال', year: 'خرداد ۱۴۰۴' }
+        ];
+
+        // ========== نمایش کتاب‌ها ==========
+        function displayBooks(books, containerId) {
+            const container = document.querySelector(`#${containerId} .books-grid`);
+            container.innerHTML = '';
+
+            books.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card';
+                card.innerHTML = `
+                    <div class="book-cover">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="book-info">
+                        <span class="book-category">کتاب درسی</span>
+                        <h3 class="book-title">${book.icon} ${book.title}</h3>
+                        <p class="book-desc">${book.desc}</p>
+                        <div class="book-meta">
+                            <span><i class="fas fa-file-pdf"></i> ${book.fileSize}</span>
+                            <span><i class="fas fa-file-alt"></i> ${book.pages}</span>
+                        </div>
+                        <div class="book-actions">
+                            <a href="#" class="btn btn-primary">
+                                <i class="fas fa-download"></i> دانلود PDF
+                            </a>
+                            <a href="#" class="btn btn-outline">
+                                <i class="fas fa-eye"></i> مشاهده
+                            </a>
+                        </div>
+                        <div class="book-badge">
+                            <i class="fas fa-star"></i> ۱۴۰۴-۱۴۰۵
+                        </div>
+                        <div class="konkur-tag">
+                            <i class="fas fa-graduation-cap"></i> کنکوری
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // ========== نمایش نمونه سوالات ==========
+        function displayExams() {
+            const grid = document.getElementById('exams-grid');
+            
+            examsData.forEach(exam => {
+                const card = document.createElement('div');
+                card.className = 'exam-card';
+                card.innerHTML = `
+                    <div class="exam-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>${exam.title}</h3>
+                    <p>${exam.questions} • ${exam.year}</p>
+                    <span class="exam-tag">امتحان نهایی با پاسخ</span>
+                    <div class="book-actions" style="justify-content: center;">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-download"></i> دانلود
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // ========== انتخاب رشته ==========
+        window.selectMajor = function(major) {
+            // آپدیت کلاس active روی کارت‌ها
+            document.querySelectorAll('.major-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // مخفی کردن همه بخش‌های کتاب
+            document.querySelectorAll('.books-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // نمایش بخش مربوطه
+            if (major === 'mathematics') {
+                document.getElementById('mathematics-books').classList.add('active');
+                if (!document.getElementById('mathematics-books').hasAttribute('data-loaded')) {
+                    displayBooks(mathematicsBooks, 'mathematics-books');
+                    document.getElementById('mathematics-books').setAttribute('data-loaded', 'true');
+                }
+            } else if (major === 'humanities') {
+                document.getElementById('humanities-books').classList.add('active');
+                if (!document.getElementById('humanities-books').hasAttribute('data-loaded')) {
+                    displayBooks(humanitiesBooks, 'humanities-books');
+                    document.getElementById('humanities-books').setAttribute('data-loaded', 'true');
+                }
+            } else if (major === 'experimental') {
+                document.getElementById('experimental-books').classList.add('active');
+                if (!document.getElementById('experimental-books').hasAttribute('data-loaded')) {
+                    displayBooks(experimentalBooks, 'experimental-books');
+                    document.getElementById('experimental-books').setAttribute('data-loaded', 'true');
+                }
+            }
+
+            // اسکرول به بخش کتاب‌ها
+            document.querySelector('.books-section.active').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        // ========== اجرا در شروع ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // نمایش کتاب‌های رشته ریاضی (پیش‌فرض)
+            displayBooks(mathematicsBooks, 'mathematics-books');
+            document.getElementById('mathematics-books').setAttribute('data-loaded', 'true');
+            
+            // نمایش نمونه سوالات
+            displayExams();
+
+            // اضافه کردن استایل برای پیام toast
+            const style = document.createElement('style');
+            style.textContent = `
+                .toast-message {
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #3F51B5, #1A237E);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 50px;
+                    box-shadow: 0 5px 20px rgba(63, 81, 181, 0.3);
+                    z-index: 1000;
+                    animation: slideDown 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+                
+                @keyframes slideDown {
+                    from {
+                        opacity: 0;
+                        transform: translate(-50%, -20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translate(-50%, 0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
