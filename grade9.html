@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پایه نهم | دانشیار</title>
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    
+    <!-- CSS مخصوص پایه نهم (رنگ نارنجی) -->
+    <style>
+        /* ========== متغیرهای رنگی مختص پایه نهم ========== */
+        :root {
+            --primary-color: #FF9800;      /* نارنجی */
+            --primary-light: #FFB74D;
+            --primary-dark: #F57C00;
+            --secondary-color: #03A9F4;     /* آبی روشن برای تضاد */
+            --gradient-start: #FF9800;
+            --gradient-end: #F44336;
+            --card-bg: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            --badge-color: #03A9F4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* ========== هدر مخصوص پایه نهم ========== */
+        .grade-header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 2rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grade-header::before {
+            content: '📙';
+            position: absolute;
+            left: -20px;
+            top: -20px;
+            font-size: 15rem;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .grade-header::after {
+            content: '۹';
+            position: absolute;
+            right: 5%;
+            bottom: -30px;
+            font-size: 12rem;
+            opacity: 0.1;
+            font-weight: bold;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb i {
+            font-size: 0.9rem;
+        }
+
+        .grade-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .grade-title i {
+            font-size: 3.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 20px;
+        }
+
+        .grade-desc {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .grade-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-item i {
+            font-size: 1.5rem;
+        }
+
+        /* ========== بخش دسته‌بندی کتاب‌ها ========== */
+        .books-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header h2 i {
+            color: var(--secondary-color);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* ========== گرید کتاب‌ها ========== */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            border: 1px solid rgba(255, 152, 0, 0.1);
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 152, 0, 0.2);
+        }
+
+        .book-cover {
+            width: 120px;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::before {
+            content: '📚';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+
+        .book-cover i {
+            position: relative;
+            z-index: 2;
+            font-size: 3rem;
+            color: var(--primary-dark);
+        }
+
+        .book-info {
+            flex: 1;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .book-category {
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .book-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .book-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .book-meta i {
+            color: var(--primary-color);
+            width: 16px;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--badge-color);
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ========== بخش نمونه سوالات ========== */
+        .exams-section {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            padding: 3rem 5%;
+            margin-top: 2rem;
+        }
+
+        .exams-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .exams-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .exams-header h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .exam-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 152, 0, 0.2);
+        }
+
+        .exam-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .exam-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .exam-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .exam-tag {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: #f0f0f0;
+            border-radius: 50px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========== فوتر ========== */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding-top: 3rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #34495e;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #ffd700;
+            color: #2c3e50;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid #34495e;
+        }
+
+        /* ========== واکنش‌گرایی ========== */
+        @media (max-width: 768px) {
+            .grade-title {
+                font-size: 2rem;
+            }
+
+            .grade-title i {
+                font-size: 2rem;
+            }
+
+            .book-card {
+                flex-direction: column;
+            }
+
+            .book-cover {
+                width: 100%;
+                height: 100px;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر مخصوص پایه نهم -->
+    <header class="grade-header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a>
+                <i class="fas fa-chevron-left"></i>
+                <span>پایه نهم</span>
+            </div>
+
+            <div class="grade-title">
+                <i class="fas fa-book-open"></i>
+                <span>پایه نهم متوسطه اول</span>
+            </div>
+
+            <p class="grade-desc">
+                کتاب‌های درسی پایه نهم دوره اول متوسطه - سال تحصیلی ۱۴۰۴-۱۴۰۵
+            </p>
+
+            <div class="grade-stats">
+                <div class="stat-item">
+                    <i class="fas fa-book"></i>
+                    <span>۱۲ کتاب درسی</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>همه کتاب‌ها PDF</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-download"></i>
+                    <span>دانلود رایگان</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- بخش اصلی کتاب‌ها -->
+    <main class="books-section">
+        <div class="section-header">
+            <h2>
+                <i class="fas fa-books"></i>
+                کتاب‌های درسی پایه نهم
+            </h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterBooks('all')">همه کتاب‌ها</button>
+                <button class="filter-btn" onclick="filterBooks('main')">دروس اصلی</button>
+                <button class="filter-btn" onclick="filterBooks('cultural')">فرهنگی و هنری</button>
+                <button class="filter-btn" onclick="filterBooks('language')">زبان‌ها</button>
+            </div>
+        </div>
+
+        <div class="books-grid" id="books-grid">
+            <!-- کتاب‌ها با جاوا اسکریپت پر می‌شوند -->
+        </div>
+    </main>
+
+    <!-- بخش نمونه سوالات -->
+    <section class="exams-section">
+        <div class="exams-container">
+            <div class="exams-header">
+                <h2>📝 نمونه سوالات امتحانی</h2>
+                <p>سوالات امتحانی نوبت اول و دوم به همراه پاسخ تشریحی</p>
+            </div>
+
+            <div class="exams-grid" id="exams-grid">
+                <!-- نمونه سوالات با جاوا اسکریپت پر می‌شوند -->
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>📚 دانشیار</h3>
+                <p>سامانه آموزشی هوشمند برای دانش‌آموزان پایه هفتم تا دوازدهم</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>دسترسی سریع</h4>
+                <ul>
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="#">دوره‌ها</a></li>
+                    <li><a href="#">اساتید</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>تماس با ما</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</li>
+                    <li><i class="fas fa-envelope"></i> info@daneshyar.ir</li>
+                    <li><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>تمامی حقوق برای دانشیار محفوظ است © ۱۴۰۴</p>
+        </div>
+    </footer>
+
+    <!-- جاوا اسکریپت مخصوص پایه نهم -->
+    <script>
+        // ========== داده‌های کتاب‌های پایه نهم ==========
+        const booksData = [
+            {
+                id: 1,
+                title: 'فارسی نهم',
+                description: 'کتاب فارسی پایه نهم دوره اول متوسطه',
+                category: 'main',
+                icon: '📖',
+                fileSize: '۹.۲ مگابایت',
+                pages: '۱۶۰ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 2,
+                title: 'نگارش فارسی نهم',
+                description: 'کتاب نگارش فارسی پایه نهم',
+                category: 'main',
+                icon: '✍️',
+                fileSize: '۶.۸ مگابایت',
+                pages: '۱۲۸ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 3,
+                title: 'ریاضی نهم',
+                description: 'کتاب ریاضی پایه نهم',
+                category: 'main',
+                icon: '🧮',
+                fileSize: '۱۴.۵ مگابایت',
+                pages: '۱۹۲ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 4,
+                title: 'علوم تجربی نهم',
+                description: 'کتاب علوم تجربی پایه نهم',
+                category: 'main',
+                icon: '🔬',
+                fileSize: '۱۷.۳ مگابایت',
+                pages: '۱۸۴ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 5,
+                title: 'آموزش قرآن نهم',
+                description: 'کتاب آموزش قرآن پایه نهم',
+                category: 'main',
+                icon: '📿',
+                fileSize: '۷.۹ مگابایت',
+                pages: '۱۳۶ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 6,
+                title: 'پیام‌های آسمان نهم',
+                description: 'کتاب پیام‌های آسمان پایه نهم',
+                category: 'main',
+                icon: '☀️',
+                fileSize: '۶.۵ مگابایت',
+                pages: '۱۱۲ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 7,
+                title: 'مطالعات اجتماعی نهم',
+                description: 'کتاب مطالعات اجتماعی پایه نهم',
+                category: 'main',
+                icon: '🌍',
+                fileSize: '۱۱.۴ مگابایت',
+                pages: '۱۶۸ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 8,
+                title: 'کار و فناوری نهم',
+                description: 'کتاب کار و فناوری پایه نهم',
+                category: 'cultural',
+                icon: '💻',
+                fileSize: '۱۰.۲ مگابایت',
+                pages: '۱۵۲ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 9,
+                title: 'فرهنگ و هنر نهم',
+                description: 'کتاب فرهنگ و هنر پایه نهم',
+                category: 'cultural',
+                icon: '🎨',
+                fileSize: '۱۳.۱ مگابایت',
+                pages: '۱۷۶ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 10,
+                title: 'تفکر و سبک زندگی نهم',
+                description: 'کتاب تفکر و سبک زندگی پایه نهم',
+                category: 'cultural',
+                icon: '💭',
+                fileSize: '۵.۴ مگابایت',
+                pages: '۱۰۴ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 11,
+                title: 'زبان انگلیسی نهم',
+                description: 'کتاب زبان انگلیسی پایه نهم',
+                category: 'language',
+                icon: '🇬🇧',
+                fileSize: '۱۵.۱ مگابایت',
+                pages: '۱۹۲ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            },
+            {
+                id: 12,
+                title: 'عربی نهم',
+                description: 'کتاب عربی پایه نهم',
+                category: 'language',
+                icon: '🕌',
+                fileSize: '۹.۸ مگابایت',
+                pages: '۱۴۴ صفحه',
+                downloadUrl: '#',
+                viewUrl: '#'
+            }
+        ];
+
+        // ========== داده‌های نمونه سوالات ==========
+        const examsData = [
+            {
+                id: 1,
+                title: 'ریاضی نهم - نوبت اول',
+                questions: '۲۴ سوال',
+                year: '۱۴۰۴',
+                downloadUrl: '#'
+            },
+            {
+                id: 2,
+                title: 'ریاضی نهم - نوبت دوم',
+                questions: '۲۶ سوال',
+                year: '۱۴۰۴',
+                downloadUrl: '#'
+            },
+            {
+                id: 3,
+                title: 'علوم نهم - نوبت اول',
+                questions: '۲۲ سوال',
+                year: '۱۴۰۴',
+                downloadUrl: '#'
+            },
+            {
+                id: 4,
+                title: 'علوم نهم - نوبت دوم',
+                questions: '۲۵ سوال',
+                year: '۱۴۰۴',
+                downloadUrl: '#'
+            },
+            {
+                id: 5,
+                title: 'فارسی نهم - نوبت اول',
+                questions: '۲۳ سوال',
+                year: '۱۴۰۴',
+                downloadUrl: '#'
+            },
+            {
+                id: 6,
+                title: 'فارسی نهم - نوبت دوم',
+                questions: '۲۷ سوال',
+                year: '۱۴۰۴',
+                downloadUrl: '#'
+            }
+        ];
+
+        // ========== نمایش کتاب‌ها ==========
+        function displayBooks(books) {
+            const grid = document.getElementById('books-grid');
+            grid.innerHTML = '';
+
+            books.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card';
+                card.innerHTML = `
+                    <div class="book-cover">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="book-info">
+                        <span class="book-category">${book.category === 'main' ? 'درس اصلی' : book.category === 'cultural' ? 'فرهنگی و هنری' : 'زبان'}</span>
+                        <h3 class="book-title">${book.icon} ${book.title}</h3>
+                        <p class="book-desc">${book.description}</p>
+                        <div class="book-meta">
+                            <span><i class="fas fa-file-pdf"></i> ${book.fileSize}</span>
+                            <span><i class="fas fa-file-alt"></i> ${book.pages}</span>
+                        </div>
+                        <div class="book-actions">
+                            <a href="${book.downloadUrl}" class="btn btn-primary">
+                                <i class="fas fa-download"></i> دانلود PDF
+                            </a>
+                            <a href="${book.viewUrl}" class="btn btn-outline">
+                                <i class="fas fa-eye"></i> مشاهده
+                            </a>
+                        </div>
+                        <div class="book-badge">
+                            <i class="fas fa-star"></i> جدید
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // ========== نمایش نمونه سوالات ==========
+        function displayExams() {
+            const grid = document.getElementById('exams-grid');
+            
+            examsData.forEach(exam => {
+                const card = document.createElement('div');
+                card.className = 'exam-card';
+                card.innerHTML = `
+                    <div class="exam-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>${exam.title}</h3>
+                    <p>${exam.questions} • سال تحصیلی ${exam.year}</p>
+                    <span class="exam-tag">همراه با پاسخ تشریحی</span>
+                    <div class="book-actions" style="justify-content: center;">
+                        <a href="${exam.downloadUrl}" class="btn btn-primary">
+                            <i class="fas fa-download"></i> دانلود
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // ========== فیلتر کتاب‌ها ==========
+        window.filterBooks = function(category) {
+            // آپدیت دکمه‌های فعال
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // فیلتر کتاب‌ها
+            if (category === 'all') {
+                displayBooks(booksData);
+            } else {
+                const filtered = booksData.filter(book => book.category === category);
+                displayBooks(filtered);
+            }
+        };
+
+        // ========== اجرا در شروع ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            displayBooks(booksData);
+            displayExams();
+
+            // اضافه کردن استایل برای پیام toast
+            const style = document.createElement('style');
+            style.textContent = `
+                .toast-message {
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #FF9800, #F44336);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 50px;
+                    box-shadow: 0 5px 20px rgba(255, 152, 0, 0.3);
+                    z-index: 1000;
+                    animation: slideDown 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+                
+                @keyframes slideDown {
+                    from {
+                        opacity: 0;
+                        transform: translate(-50%, -20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translate(-50%, 0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // ========== تابع نمایش پیام ==========
+        window.showMessage = function(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'toast-message';
+            toast.innerHTML = `<i class="fas fa-info-circle"></i> ${msg}`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        };
+    </script>
+</body>
+</html>
