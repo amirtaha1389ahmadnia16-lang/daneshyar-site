@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>علوم تجربی هفتم | دانشیار</title>
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+        }
+
+        /* ===== هدر ساده با دکمه بازگشت ===== */
+        .simple-header {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateX(5px);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title i {
+            font-size: 1.8rem;
+        }
+
+        /* ===== محتوای اصلی ===== */
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 5%;
+        }
+
+        /* کارت اصلی کتاب */
+        .book-main-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            border: 1px solid #eef2f6;
+        }
+
+        .book-emoji {
+            width: 90px;
+            height: 90px;
+            background: #FFF3E0;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .book-details {
+            flex: 1;
+        }
+
+        .book-details h1 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-details p {
+            color: #7f8c8d;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+
+        .meta-info i {
+            color: #FF9800;
+            margin-left: 5px;
+        }
+
+        .download-link {
+            background: #FF9800;
+            color: white;
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .download-link:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.3);
+        }
+
+        /* سرفصل‌ها */
+        .section-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin: 2rem 0 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 5px solid #FF9800;
+            padding-right: 1rem;
+        }
+
+        .section-title i {
+            color: #FF9800;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .chapter-box {
+            background: white;
+            border-radius: 15px;
+            padding: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f6;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .chapter-box:hover {
+            border-color: #FF9800;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.1);
+        }
+
+        .chapter-num {
+            width: 45px;
+            height: 45px;
+            background: #FFF3E0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FF9800;
+            font-weight: 600;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .chapter-info {
+            flex: 1;
+        }
+
+        .chapter-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .chapter-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .chapter-download {
+            width: 38px;
+            height: 38px;
+            background: #FFF3E0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FF9800;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.5rem;
+        }
+
+        .chapter-download:hover {
+            background: #FF9800;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* استایل برای بخش‌های علوم */
+        .science-line {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .science-line:last-child {
+            border-bottom: none;
+        }
+
+        .science-title {
+            font-weight: 600;
+            color: #FF9800;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .science-answer {
+            color: #666;
+            font-size: 0.9rem;
+            padding-right: 1.2rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .science-answer::before {
+            content: '🔬';
+            position: absolute;
+            right: -0.5rem;
+            color: #FF9800;
+            font-size: 0.8rem;
+        }
+
+        /* منابع آموزشی */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .resource-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+            border: 1px solid #eef2f6;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s;
+        }
+
+        .resource-item:hover {
+            border-color: #FF9800;
+        }
+
+        .resource-icon {
+            width: 45px;
+            height: 45px;
+            background: #FFF3E0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #FF9800;
+            flex-shrink: 0;
+        }
+
+        .resource-text {
+            flex: 1;
+        }
+
+        .resource-text h4 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 0.2rem;
+        }
+
+        .resource-text p {
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+
+        .resource-action {
+            color: #FF9800;
+            font-size: 1.2rem;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        /* ===== فوتر ساده ===== */
+        .simple-footer {
+            background: white;
+            padding: 2rem 5%;
+            margin-top: 3rem;
+            border-top: 1px solid #eef2f6;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* واکنش‌گرایی */
+        @media (max-width: 768px) {
+            .simple-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .book-main-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .meta-info {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .download-link {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .chapter-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .chapter-download {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر ساده با دکمه بازگشت -->
+    <div class="simple-header">
+        <a href="grade7.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به پایه هفتم
+        </a>
+        <div class="header-title">
+            <i class="fas fa-flask"></i>
+            علوم تجربی هفتم
+        </div>
+    </div>
+
+    <!-- محتوای اصلی -->
+    <div class="container">
+        <!-- کارت کتاب -->
+        <div class="book-main-card">
+            <div class="book-emoji">🔬</div>
+            <div class="book-details">
+                <h1>کتاب علوم تجربی هفتم</h1>
+                <p>شامل مفاهیم پایه‌ای علوم، زیست‌شناسی، فیزیک، شیمی و زمین‌شناسی</p>
+                <div class="meta-info">
+                    <span><i class="fas fa-file-pdf"></i> ۱۵.۳ مگابایت</span>
+                    <span><i class="fas fa-book"></i> ۱۶۸ صفحه</span>
+                    <span><i class="fas fa-calendar"></i> ۱۴۰۴-۱۴۰۵</span>
+                </div>
+            </div>
+            <a href="#" class="download-link" onclick="alert('لینک دانلود به زودی اضافه می‌شود')">
+                <i class="fas fa-download"></i>
+                دانلود PDF کتاب
+            </a>
+        </div>
+
+        <!-- فصل‌های کتاب -->
+        <div class="section-title">
+            <i class="fas fa-list-ul"></i>
+            فصل‌های کتاب
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">۱</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">تجربه و تفکر</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۲</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">اندازه‌گیری در علوم</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۴ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۳ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۳</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">اتم‌ها و عناصر</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۴ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۳ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۴</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">مواد پیرامون ما</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۵</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">از معدن تا خانه</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۶</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">سفر آب روی زمین</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۷</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">سفر غذا</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۴ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۳ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۸</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">انرژی و تبدیل‌های آن</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۴ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۳ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۹</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">منابع انرژی</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۱۰</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">گرما و بهینه‌سازی مصرف انرژی</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۴ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۳ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۱۱</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">یاخته و سازمان‌بندی آن</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۴ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۳ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۱۲</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">سفر سلامت</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۱۳</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">زیست‌گاه‌ها</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۱۴</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">گردش مواد</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۱۵</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بیم‌هرگان</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- فعالیت‌های علوم -->
+        <div class="section-title">
+            <i class="fas fa-tasks"></i>
+            فعالیت‌ها با جواب
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">🔬</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">فعالیت‌های فصل ۱ تا ۵</div>
+                    <div class="chapter-items">
+                        <span>۲۴ فعالیت با جواب کامل</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🔬</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">فعالیت‌های فصل ۶ تا ۱۰</div>
+                    <div class="chapter-items">
+                        <span>۲۰ فعالیت با جواب کامل</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🔬</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">فعالیت‌های فصل ۱۱ تا ۱۵</div>
+                    <div class="chapter-items">
+                        <span>۲۲ فعالیت با جواب کامل</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- آزمایش کنید -->
+        <div class="section-title">
+            <i class="fas fa-flask"></i>
+            آزمایش کنید
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">🧪</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">آزمایش‌های فصل ۲</div>
+                    <div class="chapter-items">
+                        <span>۳ آزمایش با شرح کامل</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🧪</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">آزمایش‌های فصل ۵</div>
+                    <div class="chapter-items">
+                        <span>۲ آزمایش با شرح کامل</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- فکر کنید -->
+        <div class="section-title">
+            <i class="fas fa-lightbulb"></i>
+            فکر کنید
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">💭</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">فکر کنید فصل‌های ۱ تا ۸</div>
+                    <div class="chapter-items">
+                        <span>۱۶ سوال تفکری با جواب</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- خود را بیازمایید -->
+        <div class="section-title">
+            <i class="fas fa-check-circle"></i>
+            خود را بیازمایید
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">✅</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">خودآزمایی‌های کتاب</div>
+                    <div class="chapter-items">
+                        <span>۲۴ خودآزمایی با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- اطلاعات جمع‌آوری کنید -->
+        <div class="section-title">
+            <i class="fas fa-database"></i>
+            اطلاعات جمع‌آوری کنید
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">📊</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">پروژه‌های تحقیقی</div>
+                    <div class="chapter-items">
+                        <span>۸ پروژه با راهنمایی</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- ویدیوهای آموزشی -->
+        <div class="section-title">
+            <i class="fas fa-video"></i>
+            ویدیوهای آموزشی
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-item">
+                <div class="resource-icon">🎥</div>
+                <div class="resource-text">
+                    <h4>آموزش فصل ۱ - تجربه و تفکر</h4>
+                    <p>۳۵ دقیقه - استاد کریمی</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('ویدیو به زودی اضافه می‌شود')"><i class="fas fa-play"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">🎥</div>
+                <div class="resource-text">
+                    <h4>آموزش فصل ۳ - اتم‌ها و عناصر</h4>
+                    <p>۴۲ دقیقه - استاد کریمی</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('ویدیو به زودی اضافه می‌شود')"><i class="fas fa-play"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">🎥</div>
+                <div class="resource-text">
+                    <h4>آموزش فصل ۷ - سفر غذا</h4>
+                    <p>۳۸ دقیقه - استاد کریمی</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('ویدیو به زودی اضافه می‌شود')"><i class="fas fa-play"></i></a>
+            </div>
+        </div>
+
+        <!-- نمونه سوالات امتحانی -->
+        <div class="section-title">
+            <i class="fas fa-pencil-alt"></i>
+            نمونه سوالات امتحانی
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>نمونه سوال نوبت اول (دی ۱۴۰۴)</h4>
+                    <p>۲۰ سوال - همراه با پاسخنامه</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>نمونه سوال نوبت دوم (خرداد ۱۴۰۵)</h4>
+                    <p>۲۲ سوال - همراه با پاسخنامه</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>سوالات فصل به فصل</h4>
+                    <p>۱۵ فصل - هر فصل ۱۵ سوال</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+        </div>
+
+        <!-- جزوه‌های آموزشی -->
+        <div class="section-title">
+            <i class="fas fa-file-alt"></i>
+            جزوه‌های آموزشی
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>جزوه فصل ۱ تا ۵</h4>
+                    <p>۲۸ صفحه - ۳.۲ مگابایت</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>جزوه فصل ۶ تا ۱۰</h4>
+                    <p>۲۴ صفحه - ۲.۸ مگابایت</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>جزوه فصل ۱۱ تا ۱۵</h4>
+                    <p>۲۶ صفحه - ۳.۰ مگابایت</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- فوتر ساده -->
+    <div class="simple-footer">
+        <p>📚 دانشیار - تمامی حقوق محفوظ است © ۱۴۰۴</p>
+    </div>
+
+    <script>
+        // پیام موقت برای کلیک روی لینک‌ها
+        document.querySelectorAll('.chapter-download, .resource-action, .download-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('📚 این بخش به زودی تکمیل می‌شود');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 موازنه‌یاب پیشرفته | دانشیار</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            font-family: 'Vazirmatn', sans-serif;
+            padding: 2rem;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #0a0a0a;
+            border-radius: 40px;
+            padding: 2.5rem;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+        }
+
+        /* هدر با دکمه بازگشت */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: #000000;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #ffd700;
+            color: #000000;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #ffd700;
+            text-align: center;
+            flex: 1;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #000000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        /* بخش ورودی */
+        .input-section {
+            background: #0f0f0f;
+            border-radius: 30px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid #ffd700;
+        }
+
+        .input-title {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-title i {
+            color: #ffffff;
+        }
+
+        .equation-inputs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .eq-field {
+            flex: 1;
+            min-width: 250px;
+            padding: 1.2rem 1.8rem;
+            background: #1a1a1a;
+            border: 2px solid #ffd700;
+            border-radius: 60px;
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-family: 'Vazirmatn', monospace;
+            text-align: center;
+            direction: ltr;
+            transition: all 0.3s;
+        }
+
+        .eq-field:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .arrow {
+            font-size: 3rem;
+            color: #ffd700;
+            font-weight: 300;
+        }
+
+        .info-text {
+            color: #cccccc;
+            font-size: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            background: #1a1a1a;
+            padding: 0.8rem;
+            border-radius: 50px;
+        }
+
+        .info-text i {
+            color: #ffd700;
+            margin-left: 0.5rem;
+        }
+
+        /* بخش ضرایب */
+        .coeff-section {
+            background: #0f0f0f;
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid #ffd700;
+            display: none;
+        }
+
+        .coeff-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .coeff-title i {
+            color: #ffd700;
+        }
+
+        .coeff-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            direction: ltr;
+        }
+
+        .coeff-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: #1a1a1a;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            border: 1px solid #ffd700;
+        }
+
+        .coeff-input {
+            width: 80px;
+            height: 60px;
+            background: #000000;
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            color: #ffd700;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            font-family: 'Vazirmatn', monospace;
+        }
+
+        .coeff-input:focus {
+            outline: none;
+            border-color: #ffffff;
+        }
+
+        .coeff-label {
+            color: #ffffff;
+            font-family: 'Vazirmatn', monospace;
+            font-size: 1.2rem;
+            margin-right: 0.3rem;
+        }
+
+        .plus-sign {
+            color: #ffd700;
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 0 0.5rem;
+        }
+
+        /* دکمه‌ها */
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .btn-primary {
+            background: #000000;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+
+        .btn-primary:hover {
+            background: #ffd700;
+            color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .btn-check {
+            background: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .btn-check:hover {
+            background: #ffffff;
+            color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .btn-solve {
+            background: #ffd700;
+            color: #000000;
+            border: 2px solid #ffd700;
+            font-size: 1.2rem;
+            padding: 1.5rem 3rem;
+        }
+
+        .btn-solve:hover {
+            background: #000000;
+            color: #ffd700;
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .btn-reset {
+            background: #1a1a1a;
+            color: #cccccc;
+            border: 1px solid #333333;
+        }
+
+        .btn-reset:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        /* نتیجه */
+        .result-box {
+            background: #0f0f0f;
+            border-radius: 30px;
+            padding: 2rem;
+            border: 2px solid #ffd700;
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .result-correct {
+            color: #ffd700;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-wrong {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .atom-count {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+            direction: ltr;
+        }
+
+        .atom-item {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #ffd700;
+        }
+
+        .atom-symbol {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .atom-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .left-count {
+            color: #ffffff;
+        }
+
+        .right-count {
+            color: #ffffff;
+        }
+
+        .equal {
+            color: #ffd700;
+            font-size: 1.3rem;
+        }
+
+        .solution-box {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 2px solid #ffd700;
+            direction: ltr;
+        }
+
+        .solution-title {
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .solution-equation {
+            font-size: 1.8rem;
+            font-family: 'Vazirmatn', monospace;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem;
+            background: #000000;
+            border-radius: 15px;
+            word-break: break-word;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666666;
+            font-size: 1rem;
+        }
+
+        .note {
+            background: #1a1a1a;
+            border-right: 4px solid #ffd700;
+            padding: 1.2rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            color: #cccccc;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- هدر با دکمه بازگشت -->
+        <div class="header">
+            <a href="../index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i> بازگشت
+            </a>
+            <h1>🧪 موازنه‌یاب پیشرفته</h1>
+        </div>
+        <div class="subtitle">
+            ✨ پشتیبانی کامل از ترکیبات ساده و پرانتزدار ✨
+        </div>
+        <span class="badge"><i class="fas fa-crown"></i> الگوریتم واقعی موازنه - دقیق و سریع</span>
+
+        <!-- بخش ورودی معادله -->
+        <div class="input-section">
+            <div class="input-title">
+                <i class="fas fa-pencil-alt"></i> معادله خود را وارد کنید:
+            </div>
+            <div class="equation-inputs">
+                <input type="text" class="eq-field" id="reactants" placeholder="مثال: H2 + O2" value="H2 + O2">
+                <span class="arrow">→</span>
+                <input type="text" class="eq-field" id="products" placeholder="مثال: H2O" value="H2O">
+            </div>
+            <div class="info-text">
+                <i class="fas fa-info-circle"></i> ترکیبات را با + جدا کنید • پرانتز مجاز است (مثال: Ca(OH)2)
+            </div>
+        </div>
+
+        <!-- بخش ضرایب -->
+        <div class="coeff-section" id="coeffSection">
+            <div class="coeff-title">
+                <i class="fas fa-sliders-h"></i> ضرایب استوکیومتری:
+            </div>
+            <div class="coeff-grid" id="coeffGrid"></div>
+        </div>
+
+        <!-- دکمه‌ها -->
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="parseEquation()">
+                <i class="fas fa-cog"></i> آماده‌سازی
+            </button>
+            <button class="btn btn-check" onclick="checkBalance()">
+                <i class="fas fa-check-circle"></i> بررسی موازنه
+            </button>
+            <button class="btn btn-solve" onclick="solveEquation()">
+                <i class="fas fa-calculator"></i> حل خودکار
+            </button>
+            <button class="btn btn-reset" onclick="resetAll()">
+                <i class="fas fa-redo-alt"></i> پاک کردن
+            </button>
+        </div>
+
+        <!-- نتیجه بررسی -->
+        <div class="result-box" id="resultBox">
+            <div id="resultMessage"></div>
+            <div id="atomCounts" class="atom-count"></div>
+        </div>
+
+        <!-- توضیحات -->
+        <div class="note">
+            <i class="fas fa-lightbulb" style="color: #ffd700;"></i> 
+            <strong>نکته:</strong> برای موازنه خودکار، دکمه <span style="color: #ffd700;">حل خودکار</span> را بزنید. ضرایب به‌صورت اعداد صحیح ساده‌سازی می‌شوند.
+        </div>
+
+        <div class="footer">
+            <p>✨ طراحی شده با ❤️ برای دانشیار | الگوریتم گاوس-جردن ✨</p>
+        </div>
+    </div>
+
+    <script>
+        // متغیرهای اصلی
+        let currentReactants = [];
+        let currentProducts = [];
+        let allCompounds = [];
+        let coefficients = [];
+
+        // ========== تابع تشخیص عناصر (پشتیبانی از پرانتز) ==========
+        function parseCompound(compound) {
+            const elements = {};
+            let i = 0;
+            const n = compound.length;
+            
+            while (i < n) {
+                if (compound[i] === '(') {
+                    // شروع پرانتز
+                    i++;
+                    let group = '';
+                    let depth = 1;
+                    
+                    while (i < n && depth > 0) {
+                        if (compound[i] === '(') depth++;
+                        else if (compound[i] === ')') depth--;
+                        
+                        if (depth > 0) {
+                            group += compound[i];
+                        }
+                        i++;
+                    }
+                    
+                    // خواندن تعداد تکرار
+                    let count = '';
+                    while (i < n && compound[i] >= '0' && compound[i] <= '9') {
+                        count += compound[i];
+                        i++;
+                    }
+                    const multiplier = count === '' ? 1 : parseInt(count);
+                    
+                    // محاسبه عناصر داخل پرانتز به صورت بازگشتی
+                    const innerElements = parseCompound(group);
+                    for (let [el, cnt] of Object.entries(innerElements)) {
+                        elements[el] = (elements[el] || 0) + cnt * multiplier;
+                    }
+                    
+                } else if (compound[i] >= 'A' && compound[i] <= 'Z') {
+                    // عنصر جدید
+                    let element = compound[i];
+                    i++;
+                    
+                    // حرف کوچک بعدی (برای عناصر دوحرفی)
+                    if (i < n && compound[i] >= 'a' && compound[i] <= 'z') {
+                        element += compound[i];
+                        i++;
+                    }
+                    
+                    // خواندن تعداد اتم‌ها
+                    let count = '';
+                    while (i < n && compound[i] >= '0' && compound[i] <= '9') {
+                        count += compound[i];
+                        i++;
+                    }
+                    
+                    const num = count === '' ? 1 : parseInt(count);
+                    elements[element] = (elements[element] || 0) + num;
+                    
+                } else {
+                    // کاراکتر نامعتبر (نادیده گرفته شود)
+                    i++;
+                }
+            }
+            
+            return elements;
+        }
+
+        // ========== تجزیه معادله ==========
+        function parseEquation() {
+            const reactantsStr = document.getElementById('reactants').value.trim();
+            const productsStr = document.getElementById('products').value.trim();
+
+            if (!reactantsStr || !productsStr) {
+                alert('❌ لطفاً معادله را کامل وارد کنید');
+                return;
+            }
+
+            try {
+                // جداسازی ترکیبات با +
+                currentReactants = reactantsStr.split('+').map(s => s.trim());
+                currentProducts = productsStr.split('+').map(s => s.trim());
+                allCompounds = [...currentReactants, ...currentProducts];
+                
+                // مقداردهی اولیه ضرایب (همه 1)
+                coefficients = new Array(allCompounds.length).fill(1);
+                
+                // نمایش فیلدهای ضرایب
+                displayCoefficients();
+                
+                document.getElementById('coeffSection').style.display = 'block';
+                document.getElementById('resultBox').style.display = 'none';
+                
+            } catch (error) {
+                alert('❌ خطا در تجزیه معادله');
+                console.error(error);
+            }
+        }
+
+        // ========== نمایش ضرایب در قالب تعاملی ==========
+        function displayCoefficients() {
+            const grid = document.getElementById('coeffGrid');
+            grid.innerHTML = '';
+
+            // واکنش‌دهنده‌ها
+            for (let i = 0; i < currentReactants.length; i++) {
+                if (i > 0) {
+                    const plus = document.createElement('span');
+                    plus.className = 'plus-sign';
+                    plus.innerHTML = '+';
+                    grid.appendChild(plus);
+                }
+                
+                const item = document.createElement('div');
+                item.className = 'coeff-item';
+                item.innerHTML = `
+                    <input type="number" class="coeff-input" id="coeff_${i}" value="${coefficients[i]}" min="0" step="0.01" onchange="updateCoeff(${i}, this.value)">
+                    <span class="coeff-label"> ${currentReactants[i]}</span>
+                `;
+                grid.appendChild(item);
+            }
+
+            // فلش
+            const arrow = document.createElement('span');
+            arrow.className = 'plus-sign';
+            arrow.innerHTML = '→';
+            grid.appendChild(arrow);
+
+            // فرآورده‌ها
+            for (let i = 0; i < currentProducts.length; i++) {
+                if (i > 0) {
+                    const plus = document.createElement('span');
+                    plus.className = 'plus-sign';
+                    plus.innerHTML = '+';
+                    grid.appendChild(plus);
+                }
+                
+                const idx = currentReactants.length + i;
+                const item = document.createElement('div');
+                item.className = 'coeff-item';
+                item.innerHTML = `
+                    <input type="number" class="coeff-input" id="coeff_${idx}" value="${coefficients[idx]}" min="0" step="0.01" onchange="updateCoeff(${idx}, this.value)">
+                    <span class="coeff-label"> ${currentProducts[i]}</span>
+                `;
+                grid.appendChild(item);
+            }
+        }
+
+        // ========== به‌روزرسانی ضرایب ==========
+        function updateCoeff(index, value) {
+            coefficients[index] = parseFloat(value) || 0;
+        }
+
+        // ========== شمارش اتم‌ها در هر طرف ==========
+        function countAtoms(coeffs = coefficients) {
+            const leftAtoms = {};
+            const rightAtoms = {};
+
+            for (let i = 0; i < currentReactants.length; i++) {
+                const compound = currentReactants[i];
+                const coeff = coeffs[i];
+                const elements = parseCompound(compound);
+                
+                for (let [element, count] of Object.entries(elements)) {
+                    leftAtoms[element] = (leftAtoms[element] || 0) + count * coeff;
+                }
+            }
+
+            for (let i = 0; i < currentProducts.length; i++) {
+                const compound = currentProducts[i];
+                const coeff = coeffs[currentReactants.length + i];
+                const elements = parseCompound(compound);
+                
+                for (let [element, count] of Object.entries(elements)) {
+                    rightAtoms[element] = (rightAtoms[element] || 0) + count * coeff;
+                }
+            }
+
+            return { leftAtoms, rightAtoms };
+        }
+
+        // ========== بررسی موازنه ==========
+        function checkBalance() {
+            const { leftAtoms, rightAtoms } = countAtoms();
+            
+            const allElements = new Set([...Object.keys(leftAtoms), ...Object.keys(rightAtoms)]);
+            
+            const atomDiv = document.getElementById('atomCounts');
+            atomDiv.innerHTML = '';
+
+            let isBalanced = true;
+            
+            for (let element of allElements) {
+                const left = leftAtoms[element] || 0;
+                const right = rightAtoms[element] || 0;
+                
+                if (Math.abs(left - right) > 0.01) isBalanced = false;
+                
+                const item = document.createElement('div');
+                item.className = 'atom-item';
+                item.innerHTML = `
+                    <div class="atom-symbol">${element}</div>
+                    <div class="atom-numbers">
+                        <span class="left-count">${left}</span>
+                        <span class="equal">${Math.abs(left - right) < 0.01 ? '✅' : '❌'}</span>
+                        <span class="right-count">${right}</span>
+                    </div>
+                `;
+                atomDiv.appendChild(item);
+            }
+
+            const resultMessage = document.getElementById('resultMessage');
+            if (isBalanced) {
+                resultMessage.innerHTML = '<div class="result-correct">✅ آفرین! معادله موازنه است 🎉</div>';
+            } else {
+                resultMessage.innerHTML = '<div class="result-wrong">❌ معادله موازنه نیست. از دکمه "حل خودکار" استفاده کنید 👇</div>';
+            }
+
+            document.getElementById('resultBox').style.display = 'block';
+        }
+
+        // ========== حل خودکار با روش گاوس-جردن ==========
+        function solveEquation() {
+            if (currentReactants.length === 0) {
+                parseEquation();
+            }
+
+            // جمع‌آوری همه عناصر منحصربه‌فرد
+            const allElements = new Set();
+            const reactantElements = [];
+            const productElements = [];
+
+            for (let compound of currentReactants) {
+                const elems = parseCompound(compound);
+                reactantElements.push(elems);
+                Object.keys(elems).forEach(el => allElements.add(el));
+            }
+
+            for (let compound of currentProducts) {
+                const elems = parseCompound(compound);
+                productElements.push(elems);
+                Object.keys(elems).forEach(el => allElements.add(el));
+            }
+
+            const elements = Array.from(allElements);
+            const numReactants = currentReactants.length;
+            const numProducts = currentProducts.length;
+            const totalCompounds = numReactants + numProducts;
+
+            // ساخت ماتریس ضرایب (هر سطر = یک عنصر، هر ستون = یک ترکیب)
+            let matrix = [];
+            
+            for (let el of elements) {
+                let row = new Array(totalCompounds + 1).fill(0);
+                
+                // ضرایب واکنش‌دهنده‌ها (سمت چپ)
+                for (let i = 0; i < numReactants; i++) {
+                    row[i] = reactantElements[i][el] || 0;
+                }
+                
+                // ضرایب فرآورده‌ها (سمت راست با علامت منفی)
+                for (let i = 0; i < numProducts; i++) {
+                    row[numReactants + i] = -(productElements[i][el] || 0);
+                }
+                
+                matrix.push(row);
+            }
+
+            // اضافه کردن یک معادله کمکی برای ثابت کردن جواب (ضریب اول = 1)
+            let lastRow = new Array(totalCompounds + 1).fill(0);
+            lastRow[0] = 1;
+            lastRow[totalCompounds] = 1;
+            matrix.push(lastRow);
+
+            // حل دستگاه با روش گاوس-جردن
+            let solved = gaussJordan(matrix, totalCompounds);
+            
+            // ساده‌سازی ضرایب (تبدیل به اعداد صحیح)
+            let solution = simplifyCoefficients(solved);
+            
+            // اعمال ضرایب به متغیرها و فیلدهای ورودی
+            for (let i = 0; i < solution.length; i++) {
+                coefficients[i] = solution[i];
+                const input = document.getElementById(`coeff_${i}`);
+                if (input) {
+                    input.value = solution[i];
+                }
+            }
+
+            // نمایش جواب به صورت معادله موازنه شده
+            const { leftAtoms, rightAtoms } = countAtoms(solution);
+            
+            let eqString = '';
+            for (let i = 0; i < currentReactants.length; i++) {
+                if (i > 0) eqString += ' + ';
+                const coeff = solution[i];
+                if (Math.abs(coeff - 1) < 0.01) {
+                    eqString += currentReactants[i];
+                } else {
+                    eqString += coeff + ' ' + currentReactants[i];
+                }
+            }
+            eqString += ' → ';
+            for (let i = 0; i < currentProducts.length; i++) {
+                if (i > 0) eqString += ' + ';
+                const coeff = solution[currentReactants.length + i];
+                if (Math.abs(coeff - 1) < 0.01) {
+                    eqString += currentProducts[i];
+                } else {
+                    eqString += coeff + ' ' + currentProducts[i];
+                }
+            }
+
+            const resultMessage = document.getElementById('resultMessage');
+            resultMessage.innerHTML = `
+                <div class="result-correct">🎯 ضرایب موازنه پیدا شد!</div>
+                <div class="solution-box">
+                    <div class="solution-title">
+                        <i class="fas fa-check-circle"></i> معادله موازنه شده:
+                    </div>
+                    <div class="solution-equation">${eqString}</div>
+                </div>
+            `;
+
+            // نمایش تعداد اتم‌ها برای هر عنصر
+            const atomDiv = document.getElementById('atomCounts');
+            atomDiv.innerHTML = '';
+
+            const allElementsSet = new Set([...Object.keys(leftAtoms), ...Object.keys(rightAtoms)]);
+            
+            for (let element of allElementsSet) {
+                const left = leftAtoms[element] || 0;
+                const right = rightAtoms[element] || 0;
+                
+                const item = document.createElement('div');
+                item.className = 'atom-item';
+                item.innerHTML = `
+                    <div class="atom-symbol">${element}</div>
+                    <div class="atom-numbers">
+                        <span class="left-count">${left}</span>
+                        <span class="equal">✅</span>
+                        <span class="right-count">${right}</span>
+                    </div>
+                `;
+                atomDiv.appendChild(item);
+            }
+
+            document.getElementById('resultBox').style.display = 'block';
+        }
+
+        // ========== الگوریتم گاوس-جردن ==========
+        function gaussJordan(matrix, n) {
+            let m = matrix.length;
+            let rows = matrix.map(row => [...row]);
+            
+            for (let i = 0; i < Math.min(m, n); i++) {
+                // پیدا کردن سطر با بیشترین مقدار در ستون i
+                let maxRow = i;
+                for (let j = i + 1; j < m; j++) {
+                    if (Math.abs(rows[j][i]) > Math.abs(rows[maxRow][i])) {
+                        maxRow = j;
+                    }
+                }
+                
+                if (Math.abs(rows[maxRow][i]) < 1e-10) continue;
+                
+                // جابجایی سطرها
+                [rows[i], rows[maxRow]] = [rows[maxRow], rows[i]];
+                
+                // تقسیم سطر i به مقدار pivot
+                let pivot = rows[i][i];
+                for (let j = 0; j <= n; j++) {
+                    rows[i][j] /= pivot;
+                }
+                
+                // حذف از سایر سطرها
+                for (let j = 0; j < m; j++) {
+                    if (j !== i && Math.abs(rows[j][i]) > 1e-10) {
+                        let factor = rows[j][i];
+                        for (let k = 0; k <= n; k++) {
+                            rows[j][k] -= factor * rows[i][k];
+                        }
+                    }
+                }
+            }
+
+            // استخراج جواب
+            let solution = new Array(n).fill(0);
+            for (let i = 0; i < Math.min(m, n); i++) {
+                for (let j = 0; j < n; j++) {
+                    if (Math.abs(rows[i][j] - 1) < 1e-10) {
+                        solution[j] = rows[i][n];
+                        break;
+                    }
+                }
+            }
+
+            // اطمینان از مثبت بودن ضرایب
+            for (let i = 0; i < n; i++) {
+                if (solution[i] < 0) {
+                    for (let j = 0; j < n; j++) {
+                        solution[j] = -solution[j];
+                    }
+                    break;
+                }
+            }
+
+            return solution;
+        }
+
+        // ========== ساده‌سازی ضرایب به اعداد صحیح ==========
+        function simplifyCoefficients(coeffs) {
+            // پیدا کردن مخرج مشترک
+            let multiplier = 1;
+            for (let c of coeffs) {
+                let frac = Math.abs(c - Math.round(c));
+                if (frac > 0.01) {
+                    let denom = Math.round(1 / frac);
+                    multiplier = lcm(multiplier, denom);
+                }
+            }
+            
+            // اعمال ضریب
+            let simplified = coeffs.map(c => Math.round(c * multiplier));
+            
+            // ساده‌سازی با ب.م.م
+            let gcdVal = simplified.reduce((acc, val) => gcd(acc, Math.round(val)), simplified[0]);
+            if (gcdVal > 1) {
+                simplified = simplified.map(c => c / gcdVal);
+            }
+            
+            return simplified;
+        }
+
+        // ========== توابع کمکی ریاضی ==========
+        function gcd(a, b) {
+            a = Math.abs(a);
+            b = Math.abs(b);
+            while (b) {
+                let t = b;
+                b = a % b;
+                a = t;
+            }
+            return a;
+        }
+
+        function lcm(a, b) {
+            return Math.abs(a * b) / gcd(a, b);
+        }
+
+        // ========== پاک کردن همه مقادیر ==========
+        function resetAll() {
+            document.getElementById('reactants').value = '';
+            document.getElementById('products').value = '';
+            document.getElementById('coeffSection').style.display = 'none';
+            document.getElementById('resultBox').style.display = 'none';
+            // پاک کردن آرایه‌ها
+            currentReactants = [];
+            currentProducts = [];
+            allCompounds = [];
+            coefficients = [];
+        }
+    </script>
+</body>
+</html>

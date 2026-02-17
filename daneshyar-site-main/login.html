@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود و ثبت‌نام | دانشیار</title>
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo a {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: #f1f1f1;
+            padding: 5px;
+            border-radius: 50px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            z-index: 1;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            font-family: 'Vazir', sans-serif;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 15px center;
+            background-size: 20px;
+        }
+
+        input:focus, select:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: flex;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: flex;
+        }
+
+        .alert i {
+            font-size: 1.2rem;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer-text a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+        }
+
+        .back-link a:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .demo-account {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 2px dashed #667eea;
+        }
+
+        .demo-account p {
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .demo-account ul {
+            list-style: none;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .demo-account li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .demo-account i {
+            color: #667eea;
+            width: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-graduation-cap"></i>
+                    دانشیار
+                </a>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('login')">ورود</div>
+                <div class="tab" onclick="switchTab('register')">ثبت‌نام</div>
+            </div>
+
+            <!-- فرم ورود -->
+            <div id="login-form" class="form active">
+                <div id="login-alert" class="alert" style="display: none;">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="login-message"></span>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="login-email" placeholder="ایمیل" dir="ltr">
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="رمز عبور" dir="ltr">
+                </div>
+
+                <button class="btn" onclick="handleLogin()">
+                    <i class="fas fa-sign-in-alt"></i>
+                    ورود به دانشیار
+                </button>
+            </div>
+
+            <!-- فرم ثبت‌نام -->
+            <div id="register-form" class="form">
+                <div id="register-alert" class="alert" style="display: none;">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="register-message"></span>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="reg-name" placeholder="نام و نام خانوادگی">
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-graduation-cap"></i>
+                    <select id="reg-grade">
+                        <option value="">پایه تحصیلی را انتخاب کنید</option>
+                        <option value="7">هفتم</option>
+                        <option value="8">هشتم</option>
+                        <option value="9">نهم</option>
+                        <option value="10">دهم</option>
+                        <option value="11">یازدهم</option>
+                        <option value="12">دوازدهم</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="reg-email" placeholder="ایمیل" dir="ltr">
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="reg-password" placeholder="رمز عبور (حداقل ۶ کاراکتر)" dir="ltr">
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="reg-confirm" placeholder="تکرار رمز عبور" dir="ltr">
+                </div>
+
+                <button class="btn" onclick="handleRegister()">
+                    <i class="fas fa-user-plus"></i>
+                    ثبت‌نام در دانشیار
+                </button>
+            </div>
+
+            <div class="footer-text">
+                با عضویت در دانشیار، <a href="#">قوانین و مقررات</a> را می‌پذیرید.
+            </div>
+
+            <!-- حساب آزمایشی -->
+            <div class="demo-account">
+                <p><i class="fas fa-info-circle"></i> حساب آزمایشی</p>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> test@daneshyar.ir</li>
+                    <li><i class="fas fa-lock"></i> 123456</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html">
+                <i class="fas fa-arrow-right"></i>
+                بازگشت به صفحه اصلی
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // ==================== راه‌اندازی اولیه ====================
+        
+        // ایجاد حساب آزمایشی اگر وجود نداشته باشد
+        function setupDemoAccount() {
+            let users = [];
+            try {
+                const savedUsers = localStorage.getItem('daneshyar_users');
+                if (savedUsers) {
+                    users = JSON.parse(savedUsers);
+                }
+            } catch (e) {
+                console.log('خطا در خواندن localStorage');
+            }
+
+            // بررسی وجود حساب آزمایشی
+            const demoExists = users.some(u => u.email === 'test@daneshyar.ir');
+            
+            if (!demoExists) {
+                users.push({
+                    name: 'کاربر آزمایشی',
+                    grade: '10',
+                    email: 'test@daneshyar.ir',
+                    password: '123456',
+                    registeredAt: new Date().toISOString()
+                });
+                
+                localStorage.setItem('daneshyar_users', JSON.stringify(users));
+                console.log('حساب آزمایشی ایجاد شد');
+            }
+        }
+
+        // اجرا در شروع
+        setupDemoAccount();
+
+        // ==================== توابع نمایش پیام ====================
+        
+        function showAlert(type, message, isLogin) {
+            const alertDiv = isLogin ? document.getElementById('login-alert') : document.getElementById('register-alert');
+            const messageSpan = isLogin ? document.getElementById('login-message') : document.getElementById('register-message');
+            
+            messageSpan.textContent = message;
+            alertDiv.className = 'alert ' + type;
+            alertDiv.style.display = 'flex';
+            
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // ==================== تغییر بین تب‌ها ====================
+        
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            
+            if (tab === 'login') {
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+            } else {
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+                loginForm.classList.remove('active');
+                registerForm.classList.add('active');
+            }
+        }
+
+        // ==================== مدیریت ورود ====================
+        
+        function handleLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+
+            // اعتبارسنجی
+            if (!email || !password) {
+                showAlert('error', 'لطفاً ایمیل و رمز عبور را وارد کنید', true);
+                return;
+            }
+
+            // خواندن کاربران
+            let users = [];
+            try {
+                const savedUsers = localStorage.getItem('daneshyar_users');
+                if (savedUsers) {
+                    users = JSON.parse(savedUsers);
+                }
+            } catch (e) {
+                showAlert('error', 'خطا در خواندن اطلاعات', true);
+                return;
+            }
+
+            // جستجوی کاربر
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                // ذخیره اطلاعات کاربر فعلی
+                localStorage.setItem('daneshyar_current_user', JSON.stringify({
+                    name: user.name,
+                    email: user.email,
+                    grade: user.grade
+                }));
+                
+                showAlert('success', 'با موفقیت وارد شدید! در حال انتقال...', true);
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } else {
+                showAlert('error', 'ایمیل یا رمز عبور اشتباه است', true);
+            }
+        }
+
+        // ==================== مدیریت ثبت‌نام ====================
+        
+        function handleRegister() {
+            const name = document.getElementById('reg-name').value.trim();
+            const grade = document.getElementById('reg-grade').value;
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value.trim();
+            const confirm = document.getElementById('reg-confirm').value.trim();
+
+            // اعتبارسنجی
+            if (!name || !grade || !email || !password || !confirm) {
+                showAlert('error', 'لطفاً تمام فیلدها را پر کنید', false);
+                return;
+            }
+
+            if (password !== confirm) {
+                showAlert('error', 'رمز عبور و تکرار آن مطابقت ندارند', false);
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert('error', 'رمز عبور باید حداقل ۶ کاراکتر باشد', false);
+                return;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                showAlert('error', 'ایمیل معتبر وارد کنید', false);
+                return;
+            }
+
+            // خواندن کاربران موجود
+            let users = [];
+            try {
+                const savedUsers = localStorage.getItem('daneshyar_users');
+                if (savedUsers) {
+                    users = JSON.parse(savedUsers);
+                }
+            } catch (e) {
+                showAlert('error', 'خطا در خواندن اطلاعات', false);
+                return;
+            }
+
+            // بررسی تکراری نبودن ایمیل
+            if (users.some(u => u.email === email)) {
+                showAlert('error', 'این ایمیل قبلاً ثبت‌نام کرده است', false);
+                return;
+            }
+
+            // ایجاد کاربر جدید
+            const newUser = {
+                name: name,
+                grade: grade,
+                email: email,
+                password: password,
+                registeredAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            
+            // ذخیره در localStorage
+            try {
+                localStorage.setItem('daneshyar_users', JSON.stringify(users));
+                showAlert('success', 'ثبت‌نام با موفقیت انجام شد!', false);
+                
+                // پاک کردن فرم
+                document.getElementById('reg-name').value = '';
+                document.getElementById('reg-grade').value = '';
+                document.getElementById('reg-email').value = '';
+                document.getElementById('reg-password').value = '';
+                document.getElementById('reg-confirm').value = '';
+                
+                // رفتن به تب ورود بعد از ۲ ثانیه
+                setTimeout(() => {
+                    switchTab('login');
+                }, 2000);
+                
+            } catch (e) {
+                showAlert('error', 'خطا در ذخیره اطلاعات', false);
+            }
+        }
+
+        // ==================== بررسی وضعیت ورود ====================
+        
+        // نمایش نام کاربر در صفحه اصلی اگه وارد شده
+        function updateUIForLoggedInUser() {
+            try {
+                const currentUser = localStorage.getItem('daneshyar_current_user');
+                if (currentUser) {
+                    const user = JSON.parse(currentUser);
+                    console.log('کاربر وارد شده:', user.name);
+                    
+                    // اینجا می‌تونی دکمه‌های ورود/ثبت‌نام رو به نام کاربر تغییر بدی
+                    // اگه در صفحه اصلی هستیم
+                    if (window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/')) {
+                        const authButtons = document.querySelector('.auth-buttons');
+                        if (authButtons) {
+                            authButtons.innerHTML = `
+                                <span style="color: white; margin-left: 10px;">
+                                    <i class="fas fa-user"></i> ${user.name}
+                                </span>
+                                <button class="btn btn-login" onclick="logout()">خروج</button>
+                            `;
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log('خطا در بررسی وضعیت ورود');
+            }
+        }
+
+        // خروج از حساب
+        window.logout = function() {
+            localStorage.removeItem('daneshyar_current_user');
+            window.location.reload();
+        };
+
+        // اجرا در شروع
+        updateUIForLoggedInUser();
+    </script>
+</body>
+</html>

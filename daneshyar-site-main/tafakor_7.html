@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفکر و سبک زندگی هفتم | دانشیار</title>
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+        }
+
+        /* ===== هدر ساده با دکمه بازگشت ===== */
+        .simple-header {
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateX(5px);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title i {
+            font-size: 1.8rem;
+        }
+
+        /* ===== محتوای اصلی ===== */
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 5%;
+        }
+
+        /* کارت اصلی کتاب */
+        .book-main-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            border: 1px solid #eef2f6;
+        }
+
+        .book-emoji {
+            width: 90px;
+            height: 90px;
+            background: #F3E5F5;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .book-details {
+            flex: 1;
+        }
+
+        .book-details h1 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-details p {
+            color: #7f8c8d;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+
+        .meta-info i {
+            color: #9C27B0;
+            margin-left: 5px;
+        }
+
+        .download-link {
+            background: #9C27B0;
+            color: white;
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .download-link:hover {
+            background: #7B1FA2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(156, 39, 176, 0.3);
+        }
+
+        /* سرفصل‌ها */
+        .section-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin: 2rem 0 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 5px solid #9C27B0;
+            padding-right: 1rem;
+        }
+
+        .section-title i {
+            color: #9C27B0;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .chapter-box {
+            background: white;
+            border-radius: 15px;
+            padding: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f6;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .chapter-box:hover {
+            border-color: #9C27B0;
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.1);
+        }
+
+        .chapter-num {
+            width: 45px;
+            height: 45px;
+            background: #F3E5F5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9C27B0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .chapter-info {
+            flex: 1;
+        }
+
+        .chapter-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .chapter-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .chapter-download {
+            width: 38px;
+            height: 38px;
+            background: #F3E5F5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9C27B0;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.5rem;
+        }
+
+        .chapter-download:hover {
+            background: #9C27B0;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* استایل برای بخش‌های تفکر */
+        .thinking-line {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .thinking-line:last-child {
+            border-bottom: none;
+        }
+
+        .thinking-title {
+            font-weight: 600;
+            color: #9C27B0;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .thinking-answer {
+            color: #666;
+            font-size: 0.9rem;
+            padding-right: 1.2rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .thinking-answer::before {
+            content: '💭';
+            position: absolute;
+            right: -0.5rem;
+            color: #9C27B0;
+            font-size: 0.8rem;
+        }
+
+        /* منابع آموزشی */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .resource-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+            border: 1px solid #eef2f6;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s;
+        }
+
+        .resource-item:hover {
+            border-color: #9C27B0;
+        }
+
+        .resource-icon {
+            width: 45px;
+            height: 45px;
+            background: #F3E5F5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #9C27B0;
+            flex-shrink: 0;
+        }
+
+        .resource-text {
+            flex: 1;
+        }
+
+        .resource-text h4 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 0.2rem;
+        }
+
+        .resource-text p {
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+
+        .resource-action {
+            color: #9C27B0;
+            font-size: 1.2rem;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        /* ===== فوتر ساده ===== */
+        .simple-footer {
+            background: white;
+            padding: 2rem 5%;
+            margin-top: 3rem;
+            border-top: 1px solid #eef2f6;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* واکنش‌گرایی */
+        @media (max-width: 768px) {
+            .simple-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .book-main-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .meta-info {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .download-link {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .chapter-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .chapter-download {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر ساده با دکمه بازگشت -->
+    <div class="simple-header">
+        <a href="grade7.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به پایه هفتم
+        </a>
+        <div class="header-title">
+            <i class="fas fa-brain"></i>
+            تفکر و سبک زندگی هفتم
+        </div>
+    </div>
+
+    <!-- محتوای اصلی -->
+    <div class="container">
+        <!-- کارت کتاب -->
+        <div class="book-main-card">
+            <div class="book-emoji">💭</div>
+            <div class="book-details">
+                <h1>کتاب تفکر و سبک زندگی هفتم</h1>
+                <p>شامل مهارت‌های زندگی، تفکر نقادانه، خودآگاهی، ارتباط مؤثر و تصمیم‌گیری</p>
+                <div class="meta-info">
+                    <span><i class="fas fa-file-pdf"></i> ۴.۸ مگابایت</span>
+                    <span><i class="fas fa-book"></i> ۸۸ صفحه</span>
+                    <span><i class="fas fa-calendar"></i> ۱۴۰۴-۱۴۰۵</span>
+                </div>
+            </div>
+            <a href="#" class="download-link" onclick="alert('لینک دانلود به زودی اضافه می‌شود')">
+                <i class="fas fa-download"></i>
+                دانلود PDF کتاب
+            </a>
+        </div>
+
+        <!-- بخش‌های کتاب -->
+        <div class="section-title">
+            <i class="fas fa-list-ul"></i>
+            بخش‌های کتاب
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">۱</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش اول: خودآگاهی</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۲</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش دوم: همدلی</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۳</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش سوم: ارتباط مؤثر</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۴ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۳ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۴</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش چهارم: مهارت‌های مطالعه</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۵</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش پنجم: تصمیم‌گیری</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۶</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش ششم: تاب‌آوری</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۲ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۷</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش هفتم: تفکر نقادانه</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۴ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۳ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۸</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش هشتم: مدیریت هیجانات</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۹</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش نهم: روابط سالم</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">۱۰</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">بخش دهم: مهارت‌های زندگی مشترک</div>
+                    <div class="chapter-items">
+                        <span><i class="fas fa-video"></i> ۳ ویدیو</span>
+                        <span><i class="fas fa-file-pdf"></i> ۲ جزوه</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- فعالیت‌های خودآگاهی -->
+        <div class="section-title">
+            <i class="fas fa-user-circle"></i>
+            فعالیت‌های خودآگاهی
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">🧠</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">شناخت توانمندی‌ها</div>
+                    <div class="chapter-items">
+                        <span>۵ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🧠</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">شناخت احساسات</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🧠</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">خودپنداره</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- فعالیت‌های همدلی -->
+        <div class="section-title">
+            <i class="fas fa-heart"></i>
+            فعالیت‌های همدلی
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">🤝</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">درک احساس دیگران</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🤝</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">کمک به دیگران</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- فعالیت‌های ارتباط مؤثر -->
+        <div class="section-title">
+            <i class="fas fa-comments"></i>
+            فعالیت‌های ارتباط مؤثر
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">🗣️</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">مهارت گوش دادن</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🗣️</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">ابراز وجود</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🗣️</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">ارتباط غیرکلامی</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- مهارت‌های مطالعه -->
+        <div class="section-title">
+            <i class="fas fa-book-reader"></i>
+            مهارت‌های مطالعه
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">📚</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">برنامه‌ریزی درسی</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">📚</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">تکنیک‌های مطالعه</div>
+                    <div class="chapter-items">
+                        <span>۵ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">📚</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">مدیریت زمان</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- تصمیم‌گیری -->
+        <div class="section-title">
+            <i class="fas fa-balance-scale"></i>
+            تصمیم‌گیری
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">⚖️</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">مراحل تصمیم‌گیری</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">⚖️</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">تصمیم‌گیری در موقعیت‌ها</div>
+                    <div class="chapter-items">
+                        <span>۵ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- تاب‌آوری -->
+        <div class="section-title">
+            <i class="fas fa-shield-alt"></i>
+            تاب‌آوری
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">🛡️</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">مقابله با مشکلات</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🛡️</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">مدیریت استرس</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- تفکر نقادانه -->
+        <div class="section-title">
+            <i class="fas fa-search"></i>
+            تفکر نقادانه
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">🔍</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">تشخیص درستی اطلاعات</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">🔍</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">تحلیل موقعیت‌ها</div>
+                    <div class="chapter-items">
+                        <span>۵ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- مدیریت هیجانات -->
+        <div class="section-title">
+            <i class="fas fa-smile"></i>
+            مدیریت هیجانات
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">😊</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">شناخت هیجانات</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">😊</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">مدیریت خشم</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">😊</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">مدیریت اضطراب</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- روابط سالم -->
+        <div class="section-title">
+            <i class="fas fa-users"></i>
+            روابط سالم
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-box">
+                <div class="chapter-num">👥</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">روابط با خانواده</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">👥</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">روابط با دوستان</div>
+                    <div class="chapter-items">
+                        <span>۴ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+            <div class="chapter-box">
+                <div class="chapter-num">👥</div>
+                <div class="chapter-info">
+                    <div class="chapter-name">روابط با معلمان</div>
+                    <div class="chapter-items">
+                        <span>۳ فعالیت با پاسخ</span>
+                    </div>
+                </div>
+                <a href="#" class="chapter-download" onclick="alert('فایل به زودی اضافه می‌شود')">
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- ویدیوهای آموزشی -->
+        <div class="section-title">
+            <i class="fas fa-video"></i>
+            ویدیوهای آموزشی
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-item">
+                <div class="resource-icon">🎥</div>
+                <div class="resource-text">
+                    <h4>مهارت خودآگاهی</h4>
+                    <p>۳۵ دقیقه - استاد محمدی</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('ویدیو به زودی اضافه می‌شود')"><i class="fas fa-play"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">🎥</div>
+                <div class="resource-text">
+                    <h4>مهارت همدلی</h4>
+                    <p>۳۰ دقیقه - استاد محمدی</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('ویدیو به زودی اضافه می‌شود')"><i class="fas fa-play"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">🎥</div>
+                <div class="resource-text">
+                    <h4>مهارت ارتباط مؤثر</h4>
+                    <p>۴۰ دقیقه - استاد حسینی</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('ویدیو به زودی اضافه می‌شود')"><i class="fas fa-play"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">🎥</div>
+                <div class="resource-text">
+                    <h4>مهارت تصمیم‌گیری</h4>
+                    <p>۳۵ دقیقه - استاد حسینی</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('ویدیو به زودی اضافه می‌شود')"><i class="fas fa-play"></i></a>
+            </div>
+        </div>
+
+        <!-- نمونه سوالات امتحانی -->
+        <div class="section-title">
+            <i class="fas fa-pencil-alt"></i>
+            نمونه سوالات امتحانی
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>نمونه سوال نوبت اول (دی ۱۴۰۴)</h4>
+                    <p>۱۶ سوال - همراه با پاسخنامه</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>نمونه سوال نوبت دوم (خرداد ۱۴۰۵)</h4>
+                    <p>۱۸ سوال - همراه با پاسخنامه</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>سوالات بخش به بخش</h4>
+                    <p>۱۰ بخش - هر بخش ۸ سوال</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+        </div>
+
+        <!-- جزوه‌های آموزشی -->
+        <div class="section-title">
+            <i class="fas fa-file-alt"></i>
+            جزوه‌های آموزشی
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>جزوه مهارت‌های زندگی</h4>
+                    <p>۲۴ صفحه - ۲.۲ مگابایت</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>جزوه تفکر نقادانه</h4>
+                    <p>۱۸ صفحه - ۱.۸ مگابایت</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon">📄</div>
+                <div class="resource-text">
+                    <h4>جزوه مدیریت هیجانات</h4>
+                    <p>۲۰ صفحه - ۲.۰ مگابایت</p>
+                </div>
+                <a href="#" class="resource-action" onclick="alert('فایل به زودی اضافه می‌شود')"><i class="fas fa-download"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- فوتر ساده -->
+    <div class="simple-footer">
+        <p>📚 دانشیار - تمامی حقوق محفوظ است © ۱۴۰۴</p>
+    </div>
+
+    <script>
+        // پیام موقت برای کلیک روی لینک‌ها
+        document.querySelectorAll('.chapter-download, .resource-action, .download-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('📚 این بخش به زودی تکمیل می‌شود');
+            });
+        });
+    </script>
+</body>
+</html>
